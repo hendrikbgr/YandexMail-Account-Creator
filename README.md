@@ -18,15 +18,20 @@ Change all needed values such as username, password and recovery email.
 
 ## Running
 
-To run this script open your Terminal
+To run this script open your Terminal and enter:
 
-'cd' to the project folder
+```
+git clone https://github.com/hendrikbgr/ProtonMail-Account-Creator
+```
+
+then 'cd' to the project folder
 
 and enter:
 
 ```
 python emails.py
 ```
+
 ## Built With
 
 * [jg-fisher](https://github.com/jg-fisher/protonMailGenerator) - Original Code
@@ -45,4 +50,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Hat tip to anyone whose code was used
 * Inspiration
 
+## To Do List
 
+* Add random username and password.
+* Use 10 Minute Mail Api for verification and recovery email
+* Print account details to text file or cvs
