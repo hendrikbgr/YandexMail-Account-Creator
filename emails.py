@@ -4,31 +4,46 @@
 # 🖥 Version: 0.1
 
 from selenium import webdriver
+from colorama import Fore, Back, Style
 import time
+import random
+import string
+
+from selenium.webdriver.chrome.options import Options 
+
+options = Options()
+options.add_argument('--proxy-server=51.79.140.77:8080') # <-- Enter your Proxy here [Proxy:Port]
+driver = webdriver.Chrome(executable_path='/Users/hendrik/Development/protonMailGenerator/chromedriver', chrome_options=options)
 
 url = 'https://protonmail.com/signup'
 
+def randomStringDigits(stringLength=13):
+    # Generate a random string of letters and digits
+    lettersAndDigits = string.ascii_letters + string.digits
+    return ''.join(random.choice(lettersAndDigits) for i in range(stringLength))
+
+rngusername = randomStringDigits(13)
+rngpassword = randomStringDigits(15)
 
 # Change Path to Chrome Driver Path (or move your ChromeDriver into the project folder)
-driver = webdriver.Chrome('/Users/hendrik/Development/protonMailGenerator/chromedriver')
 driver.get(url)
 
-time.sleep(2)
+time.sleep(4)
 
 driver.find_element_by_class_name('panel-heading').click()
 
-time.sleep(1)
+time.sleep(3)
 
 driver.find_element_by_id('freePlan').click()
 
-time.sleep(1)
+time.sleep(3)
 
 driver.switch_to_frame(0)
 
 time.sleep(2)
 
 # Pick your username and replace it with 'YourUsername'
-driver.find_element_by_id('username').send_keys('YourUsername')
+driver.find_element_by_id('username').send_keys(rngusername)
 
 time.sleep(1)
 
@@ -37,12 +52,12 @@ driver.switch_to.default_content()
 time.sleep(1)
 
 # Pick your password and replace it with 'YourPassword'
-driver.find_element_by_id('password').send_keys('YourPassword')
+driver.find_element_by_id('password').send_keys(rngpassword)
 
 time.sleep(1)
 
 # Pick your password and replace it with 'YourPassword' (Make sure to use the same password)
-driver.find_element_by_id('passwordc').send_keys('YourPassword')
+driver.find_element_by_id('passwordc').send_keys(rngpassword)
 
 time.sleep(1)
 
@@ -71,3 +86,7 @@ time.sleep(1)
 driver.find_element_by_class_name('codeVerificator-btn-send').click()
 
 time.sleep(3)
+
+print ('\033[31m' + "Your New Email Adress is: ", rngusername,"@protonmail.com", sep='' + '\033[0m')
+print ('\033[31m' + "Your New Email Password is: ", rngpassword + '\033[0m')
+
