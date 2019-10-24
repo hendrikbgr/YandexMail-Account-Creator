@@ -52,6 +52,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## To Do List
 
-* Add random username and password.
+* Add random username and password. ✅
 * Use 10 Minute Mail Api for verification and recovery email
 * Print account details to text file or cvs
