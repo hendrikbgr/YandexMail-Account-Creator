@@ -35,6 +35,7 @@ python emails.py
 ## Built With
 
 * [jg-fisher](https://github.com/jg-fisher/protonMailGenerator) - Original Code
+* [ProxyScraper](https://github.com/JaredLGillespie/proxyscrape) - Tool for Proxy Scraping
 
 ## Authors
 
@@ -52,6 +53,11 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## To Do List
 
-* Add random username and password.
+* Add random username and password. ✅
+* Print account details to in console ✅
+* Add more information to console when running ✅
+* Add ProxyScrape for Porxy Support ✅
 * Use 10 Minute Mail Api for verification and recovery email
-* Print account details to text file or cvs
+* Create requirements.txt file for easy installation
+
+
