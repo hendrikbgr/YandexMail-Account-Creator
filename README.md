@@ -1,6 +1,8 @@
 # ProtonMail Account Creator
 
 🚀 Create endless amounts of free ProtonMail Accounts. 🚀
+📌 Ver. 0.2 📌
+🤖 Full Proxy Support 🤖
 
 ## Getting Started
 
