@@ -2,7 +2,7 @@
 
 🚀 Create endless amounts of free ProtonMail Accounts. 🚀
 
-📌 Ver. 0.2 📌
+📌 Ver. 0.3 📌
 
 🤖 Full Proxy Support 🤖
 
