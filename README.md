@@ -10,6 +10,10 @@
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+### Support 👨‍💻
+
+Any problems with running the script and any questions please cantact me via Twitter [@hendrik_bgr](https://twitter.com/Hendrik_bgr)
+
 ### Prerequisites
 
 You need python 3 or python 2.7 installed on your System.
