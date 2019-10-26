@@ -20,7 +20,7 @@ Open emails.py with any TextEditor.
 
 Change all needed values such as username, password and recovery email.
 
-## Running
+## Running 🏃🏽‍♂️
 
 To run this script open your Terminal and enter:
 
@@ -55,7 +55,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Hat tip to anyone whose code was used
 * Inspiration
 
-## To Do List
+## To Do List 📝
 
 * Add random username and password. ✅
 * Print account details to in console ✅
@@ -64,4 +64,10 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Use 10 Minute Mail Api for verification and recovery email
 * Create requirements.txt file for easy installation
 
+## Known Bugs 🐛
+
+* The crawled proxies don't always work.
+* Proxy can be too slow and timeout script.
+* Verification process still needs to be done manually.
+* Also auto input can create a block for that email adress.
 
