@@ -2,7 +2,7 @@
 
 🚀 Create endless amounts of free ProtonMail Accounts. 🚀
 
-📌 Ver. 0.2 📌
+📌 Ver. 0.3 📌
 
 🤖 Full Proxy Support 🤖
 
@@ -15,7 +15,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 You need python 3 or python 2.7 installed on your System.
 
-🔥 You need to install a list of modules. List will be added with the next version. (ver 0.3) 🔥
+📌 You need to install a list of modules. List will be added with the next version. (ver 0.4) 📌
 
 ### Edit Script
 
