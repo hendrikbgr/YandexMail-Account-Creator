@@ -1,7 +1,7 @@
 # 🚀 This Project is in it's early stages of Development.
 # 📌 Also I am working on a way to auto verfiy account via 10min mail api.
 # ⚠️ Any Questions or Suggestions please Mail to: hendriksdevmail@gmail.com
-# 🖥 Version: 0.1
+# 🖥 Version: 0.2
 
 from selenium import webdriver
 from colorama import Fore, Back, Style
