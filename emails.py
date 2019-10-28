@@ -33,6 +33,7 @@ try:
 
 except OSError:
     print ("Connection error!")
+    exit()
 else:
     print ("All was fine")
 
