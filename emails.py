@@ -42,7 +42,7 @@ options = Options()
 options.add_argument('--proxy-server={}'.format(proxy)) # <-- Enter your Proxy here [Proxy:Port]
 
 # Change Path to Chrome Driver Path (or move your ChromeDriver into the project folder)
-driver = webdriver.Chrome(executable_path='/Users/hendrik/Development/ProtonMail-Account-Creator/driver/chromedriver', chrome_options=options)
+driver = webdriver.Chrome(executable_path='/driver/chromedriver', chrome_options=options)
 
 print ('\033[31m' + "ProtonMail Account Creator is Starting..." + '\033[0m')
 
