@@ -11,6 +11,10 @@
 This script can create ProtonMail Free Mail Accoiunts with the usage of free crawled proxies which are getting tested before usage. 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+### Support 👨‍💻
+
+Any problems with running the script and any questions please cantact me via Twitter [@hendrik_bgr](https://twitter.com/Hendrik_bgr)
+
 ### Prerequisites
 
 You need python 3 or python 2.7 installed on your System.
@@ -23,7 +27,7 @@ Open emails.py with any TextEditor.
 
 Change all needed values such as username, password and recovery email.
 
-## Running
+## Running 🏃🏽‍♂️
 
 To run this script open your Terminal and enter:
 
@@ -58,7 +62,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Hat tip to anyone whose code was used
 * Inspiration
 
-To Do List 📝
+## To Do List 📝
 
 * Add random username and password. ✅
 * Print account details to in console ✅
@@ -67,12 +71,10 @@ To Do List 📝
 * Use 10 Minute Mail Api for verification and recovery email
 * Create requirements.txt file for easy installation
 
-Known Bugs 🐛
+## Known Bugs 🐛
 
 * The crawled proxies don't always work. ✅
 * Proxy can be too slow and timeout script. ✅
 * Verification process still needs to be done manually. ⚠️
 * Also auto input can create a block for that email adress. ⚠️
-
-
 
