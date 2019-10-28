@@ -9,6 +9,8 @@ import warnings
 import time
 import random
 import string
+import urllib.request
+import requests
 from proxyscrape import create_collector
 
 collector = create_collector('my-collector', 'http')
@@ -18,6 +20,24 @@ proxygrab = collector.get_proxy({'code': 'us'})
 proxy = ("{}:{}".format(proxygrab.host, proxygrab.port))
 print (proxy)
 
+
+
+
+
+try:
+    proxy_host = proxygrab.host
+    proxy_port = proxygrab.port
+    proxy_auth = ":"
+    proxies = {'http':'http://{}@{}:{}/'.format(proxy_auth, proxy_host, proxy_port)}
+    requests.get("http://example.org", proxies=proxies, timeout=3.05)
+
+except OSError:
+    print ("Connection error!")
+    exit()
+else:
+    print ("All was fine")
+
+
 from selenium.webdriver.chrome.options import Options 
 
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
@@ -26,7 +46,7 @@ options = Options()
 options.add_argument('--proxy-server={}'.format(proxy)) # <-- Enter your Proxy here [Proxy:Port]
 
 # Change Path to Chrome Driver Path (or move your ChromeDriver into the project folder)
-driver = webdriver.Chrome(executable_path='/chromedriver', chrome_options=options)
+driver = webdriver.Chrome(executable_path='chromedriver', chrome_options=options)
 
 print ('\033[31m' + "ProtonMail Account Creator is Starting..." + '\033[0m')
 
@@ -43,12 +63,12 @@ rngpassword = randomStringDigits(15)
 # Pick an email for Verification. Replace 'YourEmail@Mail.com' with an email adress. (You can use 10min mail for this)
 verifymail = "YourEmail@Mail.com"
 
-# Pick an email for Notification. Replace 'YourNotification@Mail.com' with an email adress. (You can use 10min mail for this)
-notifymail = "YourNotification@Mail.com"
+# Pick an email for Notification. Replace 'YourEmail@Mail.com' with an email adress. (You can use 10min mail for this)
+notifymail = "YourEmail@Mail.com"
 
 driver.get(url)
 
-time.sleep(8)
+time.sleep(15)
 
 driver.find_element_by_class_name('panel-heading').click()
 
