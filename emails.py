@@ -1,7 +1,7 @@
 # 🚀 This Project is in it's early stages of Development.
 # 📌 Also I am working on a way to auto verfiy account via 10min mail api.
 # ⚠️ Any Questions or Suggestions please Mail to: hendriksdevmail@gmail.com
-# 🖥 Version: 0.2
+# 🖥 Version: 0.3
 
 from selenium import webdriver
 from colorama import Fore, Back, Style
@@ -18,11 +18,7 @@ collector = create_collector('my-collector', 'http')
 # Retrieve only 'us' proxies
 proxygrab = collector.get_proxy({'code': 'us'})
 proxy = ("{}:{}".format(proxygrab.host, proxygrab.port))
-print (proxy)
-
-
-
-
+print ('\033[31m' + "Proxy:", proxy + '\033[0m')
 
 try:
     proxy_host = proxygrab.host
@@ -32,11 +28,11 @@ try:
     requests.get("http://example.org", proxies=proxies, timeout=3.05)
 
 except OSError:
-    print ("Connection error!")
+    print ('\033[31m' + "Proxy Connection error!" + '\033[0m')
+    print ('\033[31m' + "Please restart script..." + '\033[0m')
     exit()
 else:
-    print ("All was fine")
-
+    print ('\033[31m' + "Proxy is working..." + '\033[0m')
 
 from selenium.webdriver.chrome.options import Options 
 
@@ -46,7 +42,7 @@ options = Options()
 options.add_argument('--proxy-server={}'.format(proxy)) # <-- Enter your Proxy here [Proxy:Port]
 
 # Change Path to Chrome Driver Path (or move your ChromeDriver into the project folder)
-driver = webdriver.Chrome(executable_path='chromedriver', chrome_options=options)
+driver = webdriver.Chrome(executable_path='/driver/chromedriver', chrome_options=options)
 
 print ('\033[31m' + "ProtonMail Account Creator is Starting..." + '\033[0m')
 
