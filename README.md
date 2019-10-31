@@ -8,10 +8,10 @@
 
 ## Features
 
-* Random inputs for Username & Password
-* Print out Account details after Creation
-* Works with ProxyCrawl for Full Proxy cover
-* Full Auto Account Creation
+* Random inputs for Username & Password ✏️
+* Print out Account details after Creation 🧾
+* Works with ProxyCrawl for Full Proxy cover 🤫
+* Full Auto Account Creation 🤖
 
 ## Getting Started
 
