@@ -2,9 +2,16 @@
 
 🚀 Create endless amounts of free ProtonMail Accounts. 🚀
 
-📌 Ver. 0.3 📌
+📌 Ver. 0.4 📌
 
 🤖 Full Proxy Support 🤖
+
+## Features
+
+* Random inputs for Username & Password
+* Print out Account details after Creation
+* Works with ProxyCrawl for Full Proxy cover
+* Full Auto Account Creation
 
 ## Getting Started
 
