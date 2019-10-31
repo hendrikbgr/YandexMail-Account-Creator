@@ -12,12 +12,35 @@ import string
 import urllib.request
 import requests
 from proxyscrape import create_collector
+import os
+clear = lambda: os.system('clear') #on Linux System
+clear()
 
 collector = create_collector('my-collector', 'http')
 
 # Retrieve only 'us' proxies
 proxygrab = collector.get_proxy({'code': 'us'})
 proxy = ("{}:{}".format(proxygrab.host, proxygrab.port))
+
+print ('\033[31m' + """\
+    ____             __              __  ___      _ __
+   / __ \_________  / /_____  ____  /  |/  /___ _(_) /
+  / /_/ / ___/ __ \/ __/ __ \/ __ \/ /|_/ / __ `/ / / 
+ / ____/ /  / /_/ / /_/ /_/ / / / / /  / / /_/ / / /  
+/_/   /_/   \____/\__/\____/_/ /_/_/  /_/\__,_/_/_/   
+                                                      
+    ___                               __ 
+   /   | ______________  __  ______  / /_
+  / /| |/ ___/ ___/ __ \/ / / / __ \/ __/
+ / ___ / /__/ /__/ /_/ / /_/ / / / / /_  
+/_/  |_\___/\___/\____/\__,_/_/ /_/\__/  
+                                         
+   ______                __            
+  / ____/_______  ____ _/ /_____  _____
+ / /   / ___/ _ \/ __ `/ __/ __ \/ ___/
+/ /___/ /  /  __/ /_/ / /_/ /_/ / /    
+\____/_/   \___/\__,_/\__/\____/_/     
+""" + '\033[0m')
 print ('\033[31m' + "Proxy:", proxy + '\033[0m')
 
 try:
