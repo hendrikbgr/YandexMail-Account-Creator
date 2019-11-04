@@ -159,3 +159,10 @@ else:
     print ('\033[31m' + "Your New Email Adress is: ", rngusername,"@protonmail.com", sep='' + '\033[0m')
     print ('\033[31m' + "Your New Email Password is: ", rngpassword + '\033[0m')
     print ('\033[31m' + "Enter Verification Code and Click 'Complete Setup'" + '\033[0m')
+
+    file2write=open("users.txt",'w')
+    file2write.write(verifymail + '\n')
+    file2write.write(notifymail + '\n')
+    file2write.write(rngpassword + '\n')
+    file2write.write(rngusername + '\n')
+    file2write.close()
