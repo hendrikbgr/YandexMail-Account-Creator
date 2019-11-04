@@ -26,7 +26,19 @@ Any problems with running the script and any questions please cantact me via Twi
 
 You need python 3 or python 2.7 installed on your System.
 
-📌 You need to install a list of modules. List will be added with the next version. (ver 0.4) 📌
+Get a copy of the Project. Open your Terminal and enter:
+
+```
+git clone https://github.com/hendrikbgr/ProtonMail-Account-Creator
+```
+
+To install all needed requirements run the following command in the project directory:
+
+```
+pip install -r requirements.txt
+```
+
+After that you can proceed to edit the Script.
 
 ### Edit Script
 
@@ -36,15 +48,9 @@ Change all needed values such as username, password and recovery email.
 
 ## Running 🏃🏽‍♂️
 
-To run this script open your Terminal and enter:
+To run this script open your Terminal in the project directory.
 
-```
-git clone https://github.com/hendrikbgr/ProtonMail-Account-Creator
-```
-
-then 'cd' to the project folder
-
-and enter:
+To start the script enter:
 
 ```
 python emails.py
