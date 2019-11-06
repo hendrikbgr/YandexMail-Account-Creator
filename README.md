@@ -1,6 +1,6 @@
-# 🔥 Version 1.0 Announcement 🔥
+# 🔥 Version 1.0 🔥
 
-We are excited to announce version 1.0 is nearly here. It was an amazing journey the last couple of weeks setting this up and finally bringing out a stable version. Most processes will be automated and the time of creation will be faster than ever. With version 1.0 you will be able to loop the process of creation and create endless amounts of accounts whilst the script creates a table with all verified accounts so they will easy for you to use.  But I won’t stop with version 1.0, I have many plans for more features and some small tweaks are planned already. Also some new scripts will be added in future, for example I am planning to add an automatic login script so you can check you’re mails faster and automated.
+We are excited to announce version 1.0 is here. It was an amazing journey the last couple of weeks setting this up and finally bringing out a stable version. Most processes will be automated and the time of creation will be faster than ever. With version 1.0 you will be able to loop the process of creation and create endless amounts of accounts whilst the script creates a table with all verified accounts so they will easy for you to use.  But I won’t stop with version 1.0, I have many plans for more features and some small tweaks are planned already. Also some new scripts will be added in future, for example I am planning to add an automatic login script so you can check you’re mails faster and automated.
 
 # ProtonMail Account Creator
 
