@@ -2,7 +2,7 @@
 
 🚀 Create endless amounts of free ProtonMail Accounts. 🚀
 
-📌 Ver. 0.4 📌
+📌 Ver. 1.0.0 📌
 
 🤖 Full Proxy Support 🤖
 
@@ -24,7 +24,7 @@ Any problems with running the script and any questions please cantact me via Twi
 
 ### Prerequisites
 
-You need python 3 or python 2.7 installed on your System.
+You need python 3 installed on your System.
 
 Get a copy of the Project. Open your Terminal and enter:
 
@@ -81,13 +81,12 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Print account details to in console ✅
 * Add more information to console when running ✅
 * Add ProxyScrape for Porxy Support ✅
+* Create requirements.txt file for easy installation ✅
 * Use 10 Minute Mail Api for verification and recovery email
-* Create requirements.txt file for easy installation
 
 ## Known Bugs 🐛
 
 * The crawled proxies don't always work. ✅
 * Proxy can be too slow and timeout script. ✅
 * Verification process still needs to be done manually. ⚠️
-* Also auto input can create a block for that email adress. ⚠️
 
