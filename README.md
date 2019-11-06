@@ -58,7 +58,6 @@ python emails.py
 
 ## Built With
 
-* [jg-fisher](https://github.com/jg-fisher/protonMailGenerator) - Original Code
 * [ProxyScraper](https://github.com/JaredLGillespie/proxyscrape) - Tool for Proxy Scraping
 
 ## Authors
