@@ -1,7 +1,7 @@
 # 🚀 This Project is in it's early stages of Development.
-# 📌 Also I am working on a way to auto verfiy account via 10min mail api.
+# 📌 Working on new features and main menu.
 # ⚠️ Any Questions or Suggestions please Mail to: hendriksdevmail@gmail.com
-# 🖥 Version: 0.3
+# 🖥 Version: 1.0.0
 
 from selenium import webdriver
 from colorama import Fore, Back, Style
@@ -15,7 +15,7 @@ import csv
 import sys
 from proxyscrape import create_collector
 import os
-clear = lambda: os.system('clear') #on Linux System
+clear = lambda: os.system('clear')
 clear()
 
 collector = create_collector('my-collector', 'https')
@@ -51,7 +51,7 @@ while (restart > 1):
     while (proxy_status == "false"):
 
         # Retrieve only 'us' proxies
-        proxygrab = collector.get_proxy({'code': 'us'})
+        proxygrab = collector.get_proxy({'code': ('us', 'uk')})
         proxy = ("{}:{}".format(proxygrab.host, proxygrab.port))
         print ('\033[31m' + "Proxy:", proxy + '\033[0m')
 
@@ -60,23 +60,23 @@ while (restart > 1):
             proxy_port = proxygrab.port
             proxy_auth = ":"
             proxies = {'http':'http://{}@{}:{}/'.format(proxy_auth, proxy_host, proxy_port)}
-            requests.get("http://example.org", proxies=proxies, timeout=3.05)
+            requests.get("http://example.org", proxies=proxies, timeout=1.5)
 
         except OSError:
             print ('\033[31m' + "Proxy Connection error!" + '\033[0m')
             time.sleep(1)
-            sys.stdout.write("\033[F") #back to previous line
-            sys.stdout.write("\033[K") #clear line
-            sys.stdout.write("\033[F") #back to previous line
-            sys.stdout.write("\033[K") #clear line
+            sys.stdout.write("\033[F")
+            sys.stdout.write("\033[K") 
+            sys.stdout.write("\033[F")
+            sys.stdout.write("\033[K") 
             proxy_status = "false"
         else:
             print ('\033[31m' + "Proxy is working..." + '\033[0m')
             time.sleep(1)
-            sys.stdout.write("\033[F") #back to previous line
-            sys.stdout.write("\033[K") #clear line
-            sys.stdout.write("\033[F") #back to previous line
-            sys.stdout.write("\033[K") #clear line
+            sys.stdout.write("\033[F")
+            sys.stdout.write("\033[K") 
+            sys.stdout.write("\033[F")
+            sys.stdout.write("\033[K") 
             proxy_status = "true"
 
 
@@ -86,10 +86,10 @@ while (restart > 1):
         warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
         options = Options()
-        options.add_argument('--proxy-server={}'.format(proxy)) # <-- Enter your Proxy here [Proxy:Port]
+        options.add_argument('--proxy-server={}'.format(proxy))
 
         # Change Path to Chrome Driver Path (or move your ChromeDriver into the project folder)
-        driver = webdriver.Chrome(executable_path='/Users/hendrik/Development/ProtonMail-Account-Creator/driver/chromedriver', chrome_options=options)
+        driver = webdriver.Chrome(executable_path='/driver/chromedriver', chrome_options=options)
 
         url = 'http://protonmail.com/signup'
 
@@ -103,7 +103,7 @@ while (restart > 1):
 
         driver.get(url)
 
-        time.sleep(3)
+        time.sleep(4)
 
         driver.find_element_by_class_name('panel-heading').click()
 
@@ -115,7 +115,7 @@ while (restart > 1):
 
         driver.switch_to_frame(0)
 
-        time.sleep(2)
+        time.sleep(3)
 
         driver.find_element_by_id('username').send_keys(rngusername)
 
@@ -137,7 +137,6 @@ while (restart > 1):
 
         time.sleep(1)
 
-        # Pick an email for Recovery. Replace 'YourEmail@Mail.com' with your email adress.
         driver.find_element_by_id('notificationEmail').send_keys(notifymail)
 
         time.sleep(1)
@@ -159,7 +158,7 @@ while (restart > 1):
         time.sleep(3)
 
         print ('\033[31m' + "Your New Email Adress is: ", rngusername,"@protonmail.com", sep='' + '\033[0m')
-        print ('\033[31m' + "Your New Email Password is: ", rngpassword + '\033[0m')
+        print ('\033[31m' + "Your New Email Password is: "  + '\033[0m' , rngpassword)
 
         complete = "false"
 
@@ -208,6 +207,6 @@ while (restart > 1):
             else:
                 print ("Ok! The script is exiting now.")
                 time.sleep(1)
-                driver.close()
+                exit()
 else:
     print("something")
