@@ -39,6 +39,7 @@ print ('\033[31m' + """\
 / /___/ /  /  __/ /_/ / /_/ /_/ / /    
 \____/_/   \___/\__,_/\__/\____/_/     
 """ + '\033[0m')
+print ('\033[31m' + "Auto Account Creator Script" + '\033[0m')
 
 restart = 2
 while (restart > 1):

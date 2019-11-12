@@ -39,15 +39,13 @@ print ('\033[31m' + """\
 / /___/ /  /  __/ /_/ / /_/ /_/ / /    
 \____/_/   \___/\__,_/\__/\____/_/     
 """ + '\033[0m')
-print ('\033[31m' + "Auto Login Script" + '\033[0m')
+print ('\033[31m' + "Auto Password Changer Script" + '\033[0m')
 
 restart = 2
 while (restart > 1):
-    # Pick an email for Verification. Replace 'YourEmail@Mail.com' with an email adress. (You can use 10min mail for this)
     emailaddress = input('\033[31m' + "Enter Email Address: " + '\033[0m')
-
-    # Pick an email for Notification. Replace 'YourEmail@Mail.com' with an email adress. (You can use 10min mail for this)
-    password = input('\033[31m' + "Enter Password: " + '\033[0m')                                                    
+    password = input('\033[31m' + "Enter Password: " + '\033[0m')
+    newpassword = input('\033[31m' + "Enter New Password: " + '\033[0m')                                  
     proxy_status = "false"
     while (proxy_status == "false"):
 
@@ -90,7 +88,7 @@ while (restart > 1):
         options.add_argument('--proxy-server={}'.format(proxy))
 
         # Change Path to Chrome Driver Path (or move your ChromeDriver into the project folder)
-        driver = webdriver.Chrome(executable_path='/driver/chromedriver', chrome_options=options)
+        driver = webdriver.Chrome(executable_path='/Users/hendrik/Development/ProtonMail-Account-Creator/driver/chromedriver', chrome_options=options)
 
         url = 'http://mail.protonmail.com/login'
 
@@ -109,6 +107,12 @@ while (restart > 1):
         driver.find_element_by_id('login_btn').click()
 
         time.sleep(3)
+
+        driver.find_element_by_id('tour-settings').click()
+
+        time.sleep(3)
+
+        driver.find_elements_by_css_selector('html.protonmail.gr__mail_protonmail_com.ua-gecko.ua-gecko-70.ua-gecko-70-0.ua-firefox.ua-firefox-70.ua-firefox-70-0.ua-desktop.ua-desktop-macintosh.ua-mac_os_x.ua-mac_os_x-10.ua-mac_os_x-10-14.js body#secured-account.appConfigBody-is-firefox.appConfigBody-is-mac.secure.appConfigBody-is-free div#body div#pm_main div#pm_settings div.settings div.row.pm_grid section.pm_form.col-1-2 p button.pm_button').click()
 
         complete = "false"
 
