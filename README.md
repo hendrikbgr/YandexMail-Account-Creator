@@ -54,12 +54,14 @@ To start the Email Creator Script enter:
 python emails.py
 ```
 
+(Still in Development)
 To start the auto Login Script enter:
 
 ```
 python login.py
 ```
 
+(Still in Development)
 To start the Password changer Script enter:
 
 ```
