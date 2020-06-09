@@ -44,7 +44,8 @@ print ('\033[31m' + """\
 print ('\033[31m' + "Auto Account Creator Script" + '\033[0m')
 print('\033[31m' + "Pick a proxy option:" + '\033[0m')
 print('\033[31m' + "(1) - Crawl Free Proxies" + '\033[0m')
-print('\033[31m' + "(2) - Load from file" + '\033[0m')
+print('\033[31m' + "(2) - Load from file (recommended)" + '\033[0m')
+print('\033[31m' + "(3) - No Proxy (experimental)" + '\033[0m')
 proxy_option = input('\033[31m' + "Enter you option number: " + '\033[0m')
 sys.stdout.write("\033[F")
 sys.stdout.write("\033[K") 
@@ -60,35 +61,10 @@ while (restart2 > 1):
     verifymail = input('\033[31m' + "Enter Email Adress for Verification: " + '\033[0m')
 
     # Pick an email for Notification. Replace 'YourEmail@Mail.com' with an email adress. (You can use 10min mail for this)
-    notifymail = input('\033[31m' + "Enter Email Adress for Recovery: " + '\033[0m') 
+    notifymail = input('\033[31m' + "(Optional - Enter 'x' do dismiss) Enter Email Adress for Recovery: " + '\033[0m') 
+
 
     if proxy_option == "2":
-        print('\033[31m' + "Getting Proxies from file..." + '\033[0m')
-        with open('./proxy.txt', 'r') as data:
-            proxy_lines = [line.strip() for line in data]
-        proxy_from_file = "false"
-        while (proxy_from_file == "false"):
-            i += 1
-            print('\033[31m' + proxy_lines[i] + '\033[0m')
-            try:
-                proxies_file = {'http':'http://:@{}/'.format(proxy_lines[i])}
-                requests.get("http://protonmail.com/", proxies=proxies_file, timeout=1.5)
-            except OSError:
-                print ('\033[31m' + "Proxy Connection error!" + '\033[0m')
-                proxy_from_file = "false"
-                sys.stdout.write("\033[F")
-                sys.stdout.write("\033[K") 
-                sys.stdout.write("\033[F")
-                sys.stdout.write("\033[K") 
-            else:
-                print ('\033[31m' + "Proxy is working..." + '\033[0m')
-                i += 1
-                options = Options()
-                options.add_argument('--proxy-server={}'.format(proxy_lines[i]))
-                proxy_from_file = "true"
-                proxy_option 
-                
-    else:
         sys.stdout.write("\033[F")
         sys.stdout.write("\033[K") 
         sys.stdout.write("\033[F")
@@ -128,7 +104,41 @@ while (restart2 > 1):
                 proxy_status = "true"
                 options = Options()
                 options.add_argument('--proxy-server={}'.format(proxy))
+    else:
+        pass
 
+    if proxy_option == "2":
+        print('\033[31m' + "Getting Proxies from file..." + '\033[0m')
+        with open('./proxy.txt', 'r') as data:
+            proxy_lines = [line.strip() for line in data]
+        proxy_from_file = "false"
+        while (proxy_from_file == "false"):
+            i += 1
+            print('\033[31m' + proxy_lines[i] + '\033[0m')
+            try:
+                proxies_file = {'http':'http://:@{}/'.format(proxy_lines[i])}
+                requests.get("http://protonmail.com/", proxies=proxies_file, timeout=1.5)
+            except OSError:
+                print ('\033[31m' + "Proxy Connection error!" + '\033[0m')
+                proxy_from_file = "false"
+                sys.stdout.write("\033[F")
+                sys.stdout.write("\033[K") 
+                sys.stdout.write("\033[F")
+                sys.stdout.write("\033[K") 
+            else:
+                print ('\033[31m' + "Proxy is working..." + '\033[0m')
+                i += 1
+                options = Options()
+                options.add_argument('--proxy-server={}'.format(proxy_lines[i]))
+                proxy_from_file = "true"
+                proxy_option 
+    else:
+        pass         
+    if proxy_option == "3":
+        options = Options()
+        print('\033[31m' + "This is experimental! Script might not work in this mode" + '\033[0m')
+    else:
+        pass
 
     warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
@@ -180,6 +190,10 @@ while (restart2 > 1):
 
     time.sleep(1)
 
+    if notifymail == "x":
+        notifymail = "mail@mail.com"
+    else:
+        pass
     driver.find_element_by_id('notificationEmail').send_keys(notifymail)
 
     time.sleep(1)
@@ -188,17 +202,27 @@ while (restart2 > 1):
 
     time.sleep(6)
 
-    driver.find_element_by_id('id-signup-radio-email').click()
+    print('\033[31m' + "What type of verification do you want to use?" + '\033[0m')
+    print('\033[31m' + "(1) Email verification" + '\033[0m')
+    print('\033[31m' + "(2) Captcha verification" + '\033[0m')
+    verifymethod = input('\033[31m' + "Enter Email Adress for Verification: " + '\033[0m')
+    if verifymethod == "1":
+        driver.find_element_by_id('id-signup-radio-email').click()
 
-    time.sleep(1)
+        time.sleep(1)
 
-    driver.find_element_by_id('emailVerification').send_keys(verifymail)
+        driver.find_element_by_id('emailVerification').send_keys(verifymail)
 
-    time.sleep(1)
+        time.sleep(1)
 
-    driver.find_element_by_class_name('codeVerificator-btn-send').click()
+        driver.find_element_by_class_name('codeVerificator-btn-send').click()
 
-    time.sleep(3)
+        time.sleep(3)
+    elif verifymethod == "2":
+        print('\033[31m' + "Please complete the captcha in your browser. " + '\033[0m')
+        captchadone = input('\033[31m' + "Hit enter when captcha is complete" + '\033[0m')
+        time.sleep(1)
+        driver.find_element_by_xpath('/html/body/div[2]/div/div/div/form/div/div/p[3]/button').click()
 
     print ('\033[31m' + "Your New Email Adress is: ", rngusername,"@protonmail.com", sep='' + '\033[0m')
     print ('\033[31m' + "Your New Email Password is: "  + '\033[0m' , rngpassword)
