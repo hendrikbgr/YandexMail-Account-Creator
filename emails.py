@@ -143,6 +143,7 @@ while (restart2 > 1):
     warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
     # Change Path to Chrome Driver Path (or move your ChromeDriver into the project folder)
+    options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(executable_path='./driver/chromedriver', chrome_options=options)
 
     url = 'http://protonmail.com/signup'
