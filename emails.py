@@ -4,17 +4,16 @@
 # 🖥 Version: 1.0.0
 
 from selenium import webdriver
-from colorama import Fore, Back, Style
 import warnings
 import time
 import random
 import string
-import urllib.request
 import requests
 import csv
 import sys
 from proxyscrape import create_collector
-from selenium.webdriver.chrome.options import Options 
+from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import WebDriverException, TimeoutException
 import os
 clear = lambda: os.system('clear')
 clear()
@@ -54,9 +53,8 @@ sys.stdout.write("\033[K")
 sys.stdout.write("\033[F")
 sys.stdout.write("\033[K")
 sys.stdout.write("\033[F")
-sys.stdout.write("\033[K") 
-restart2 = 2
-while (restart2 > 1):
+sys.stdout.write("\033[K")
+while (True):
     # Pick an email for Verification. Replace 'YourEmail@Mail.com' with an email adress. (You can use 10min mail for this)
     verifymail = input('\033[31m' + "Enter Email Adress for Verification: " + '\033[0m')
 
@@ -64,7 +62,7 @@ while (restart2 > 1):
     notifymail = input('\033[31m' + "(Optional - Enter 'x' do dismiss) Enter Email Adress for Recovery: " + '\033[0m') 
 
 
-    if proxy_option == "2":
+    if proxy_option == "1":
         sys.stdout.write("\033[F")
         sys.stdout.write("\033[K") 
         sys.stdout.write("\033[F")
@@ -117,7 +115,7 @@ while (restart2 > 1):
             print('\033[31m' + proxy_lines[i] + '\033[0m')
             try:
                 proxies_file = {'http':'http://:@{}/'.format(proxy_lines[i])}
-                requests.get("http://protonmail.com/", proxies=proxies_file, timeout=1.5)
+                requests.get("http://protonmail.com/", proxies=proxies_file, timeout=3.5)
             except OSError:
                 print ('\033[31m' + "Proxy Connection error!" + '\033[0m')
                 proxy_from_file = "false"
@@ -127,7 +125,6 @@ while (restart2 > 1):
                 sys.stdout.write("\033[K") 
             else:
                 print ('\033[31m' + "Proxy is working..." + '\033[0m')
-                i += 1
                 options = Options()
                 options.add_argument('--proxy-server={}'.format(proxy_lines[i]))
                 proxy_from_file = "true"
@@ -152,9 +149,54 @@ while (restart2 > 1):
         lettersAndDigits = string.ascii_letters + string.digits
         return ''.join(random.choice(lettersAndDigits) for i in range(stringLength))
     rngusername = randomStringDigits(13)
-    rngpassword = randomStringDigits(15) 
-    
-    driver.get(url)
+    rngpassword = randomStringDigits(15)
+    username_used = True
+    while(username_used):
+        headers = {"x-pm-apiversion" : "3", "x-pm-appversion" : "Web_3.16.33"}
+        response = requests.get(f"https://mail.protonmail.com/api/users/available?Name={rngusername}", proxies=proxies_file, timeout=3.5, headers=headers)
+        if "1000" in response.text:
+            username_used = False
+        else:
+            rngusername = randomStringDigits(13)
+    is_site_loading = True
+    #if "Select Your ProtonMail Account Type" in driver.page_source:
+        #is_site_loading = False
+    while(is_site_loading):
+        try:
+            driver.set_page_load_timeout(8)
+            driver.get(url)
+            #driver.implicitly_wait(5)
+            if "Select Your ProtonMail Account Type" in driver.page_source:
+                is_site_loading = False
+
+        except (WebDriverException, TimeoutException) as e:
+            driver.close()
+            proxy_from_file = "false"
+            while (proxy_from_file == "false"):
+                if i is len(proxy_lines):
+                    print("You reached the end of the proxy list")
+                    time.sleep(5)
+                    exit(0)
+                i += 1
+                print('\033[31m' + proxy_lines[i] + '\033[0m')
+                try:
+                    proxies_file = {'http': 'http://:@{}/'.format(proxy_lines[i])}
+                    requests.get("http://protonmail.com/", proxies=proxies_file, timeout=10.5)
+                except OSError:
+                    print('\033[31m' + "Proxy Connection error!" + '\033[0m')
+                    proxy_from_file = "false"
+                    sys.stdout.write("\033[F")
+                    sys.stdout.write("\033[K")
+                    sys.stdout.write("\033[F")
+                    sys.stdout.write("\033[K")
+                else:
+                    print('\033[31m' + "Proxy is working..." + '\033[0m')
+                    options = Options()
+                    options.add_argument('--proxy-server={}'.format(proxy_lines[i]))
+                    driver = webdriver.Chrome(executable_path='./driver/chromedriver', chrome_options=options)
+                    proxy_from_file = "true"
+                    proxy_option
+
 
     time.sleep(4)
 
@@ -166,7 +208,7 @@ while (restart2 > 1):
 
     time.sleep(4)
 
-    driver.switch_to_frame(0)
+    driver.switch_to.frame(0)
 
     time.sleep(3)
 
@@ -205,7 +247,7 @@ while (restart2 > 1):
     print('\033[31m' + "What type of verification do you want to use?" + '\033[0m')
     print('\033[31m' + "(1) Email verification" + '\033[0m')
     print('\033[31m' + "(2) Captcha verification" + '\033[0m')
-    verifymethod = input('\033[31m' + "Enter Email Adress for Verification: " + '\033[0m')
+    verifymethod = input('\033[31m' + "Pick an verification option: " + '\033[0m')
     if verifymethod == "1":
         driver.find_element_by_id('id-signup-radio-email').click()
 
@@ -270,7 +312,6 @@ while (restart2 > 1):
 / /___/ /  /  __/ /_/ / /_/ /_/ / /    
 \____/_/   \___/\__,_/\__/\____/_/     
 """ + '\033[0m')
-            restart2 == 3
 
         else:
             print ('\033[31m' + "Ok! The script is exiting now." + '\033[0m')
