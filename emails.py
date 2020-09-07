@@ -39,7 +39,6 @@ print ('\033[31m' + """\
 / /___/ /  /  __/ /_/ / /_/ /_/ / /    
 \____/_/   \___/\__,_/\__/\____/_/     
 """ + '\033[0m')
-
 print ('\033[31m' + "Auto Account Creator Script" + '\033[0m')
 print('\033[31m' + "Pick a proxy option:" + '\033[0m')
 print('\033[31m' + "(1) - Crawl Free Proxies" + '\033[0m')
@@ -56,7 +55,7 @@ sys.stdout.write("\033[F")
 sys.stdout.write("\033[K")
 while (True):
     # Pick an email for Verification. Replace 'YourEmail@Mail.com' with an email adress. (You can use 10min mail for this)
-    verifymail = input('\033[31m' + "Enter Email Adress for Verification: " + '\033[0m')
+    verifymail = input('\033[31m' + "Enter Email Adress for Verification(x for Automatic Mode): " + '\033[0m')
 
     # Pick an email for Notification. Replace 'YourEmail@Mail.com' with an email adress. (You can use 10min mail for this)
     notifymail = input('\033[31m' + "(Optional - Enter 'x' do dismiss) Enter Email Adress for Recovery: " + '\033[0m') 
@@ -158,7 +157,10 @@ while (True):
     username_used = True
     while(username_used):
         headers = {"x-pm-apiversion" : "3", "x-pm-appversion" : "Web_3.16.33"}
-        response = requests.get(f"https://mail.protonmail.com/api/users/available?Name={rngusername}", proxies=proxies_file, timeout=3.5, headers=headers)
+        if proxy_option == "3":
+            response = requests.get(f"https://mail.protonmail.com/api/users/available?Name={rngusername}", timeout=3.5, headers=headers)
+        else:
+            response = requests.get(f"https://mail.protonmail.com/api/users/available?Name={rngusername}", proxies=proxies_file, timeout=3.5, headers=headers)
         if "1000" in response.text:
             username_used = False
         else:
@@ -166,7 +168,7 @@ while (True):
     is_site_loading = True
     while(is_site_loading):
         try:
-            driver.set_page_load_timeout(8)
+            driver.set_page_load_timeout(10)
             driver.get(url)
             if "Select Your ProtonMail Account Type" in driver.page_source:
                 is_site_loading = False
@@ -247,10 +249,41 @@ while (True):
     time.sleep(6)
 
     print('\033[31m' + "What type of verification do you want to use?" + '\033[0m')
-    print('\033[31m' + "(1) Email verification" + '\033[0m')
-    print('\033[31m' + "(2) Captcha verification" + '\033[0m')
+    print('\033[31m' + "(1) Automatic Email verification" + '\033[0m')
+    print('\033[31m' + "(2) Manual Email verification" + '\033[0m')
+    print('\033[31m' + "(3) Captcha verification" + '\033[0m')
     verifymethod = input('\033[31m' + "Pick an verification option: " + '\033[0m')
     if verifymethod == "1":
+        get_response = requests.get("https://lazy-mail.com/mailbox/create/random")
+        csrf_token = get_response.text.split("input type=\"hidden\" name=\"_token\" value=\"")[1].split("\"")[0]
+        post_data = {"_token": csrf_token}
+        post_response = requests.post("https://lazy-mail.com/mailbox/create/random", data=post_data,cookies=get_response.cookies)
+        generated_email = post_response.url.split("mailbox/")[1]
+
+        driver.find_element_by_id('id-signup-radio-email').click()
+
+        time.sleep(1)
+
+        driver.find_element_by_id('emailVerification').send_keys(generated_email)
+
+        time.sleep(1)
+
+        driver.find_element_by_class_name('codeVerificator-btn-send').click()
+
+        time.sleep(3)
+        while (True):
+            get_emails = requests.get("https://lazy-mail.com/mail/fetch?new=true", cookies=post_response.cookies)
+            get_emails = requests.get("https://lazy-mail.com/mail/fetch", cookies=post_response.cookies)
+            if "ProtonMail" not in get_emails.text:
+                time.sleep(10)
+            else:
+                get_code = get_emails.text.split("ext\":\"Your Proton verification code is:<br\/>")[1].split("\"")[0]
+                break
+        driver.find_element_by_id('codeValue').send_keys(get_code)
+        driver.find_element_by_css_selector(".humanVerification-completeSetup-create").click()
+        time.sleep(5)
+
+    if verifymethod == "2":
         driver.find_element_by_id('id-signup-radio-email').click()
 
         time.sleep(1)
@@ -262,7 +295,7 @@ while (True):
         driver.find_element_by_class_name('codeVerificator-btn-send').click()
 
         time.sleep(3)
-    elif verifymethod == "2":
+    elif verifymethod == "3":
         print('\033[31m' + "Please complete the captcha in your browser. " + '\033[0m')
         captchadone = input('\033[31m' + "Hit enter when captcha is complete" + '\033[0m')
         time.sleep(1)
@@ -278,7 +311,7 @@ while (True):
 
         if complete_q == "y":
             driver.close()
-            csvData = [[rngusername + '@protonmail.com', rngpassword]]
+            csvData = [[rngusername + '@protonmail.com', rngpassword, generated_email]]
             with open('list.csv', 'a') as csvFile:
                 writer = csv.writer(csvFile)
                 writer.writerows(csvData)
