@@ -82,7 +82,7 @@ while (True):
                 proxy_port = proxygrab.port
                 proxy_auth = ":"
                 proxies = {'http':'http://{}@{}:{}/'.format(proxy_auth, proxy_host, proxy_port)}
-                requests.get("http://protonmail.com/", proxies=proxies, timeout=1.5)
+                requests.get("http://protonmail.com/", proxies=proxies, timeout=3.5)
 
             except OSError:
                 print ('\033[31m' + "Proxy Connection error!" + '\033[0m')
@@ -108,10 +108,14 @@ while (True):
     if proxy_option == "2":
         print('\033[31m' + "Getting Proxies from file..." + '\033[0m')
         with open('./proxy.txt', 'r') as data:
+            first_char = data.read(1)
+            if not first_char:
+                print("You do not have any proxies in the proxy.txt file")
+                exit(1)
             proxy_lines = [line.strip() for line in data]
         proxy_from_file = "false"
+        i = 0
         while (proxy_from_file == "false"):
-            i += 1
             print('\033[31m' + proxy_lines[i] + '\033[0m')
             try:
                 proxies_file = {'http':'http://:@{}/'.format(proxy_lines[i])}
@@ -122,7 +126,8 @@ while (True):
                 sys.stdout.write("\033[F")
                 sys.stdout.write("\033[K") 
                 sys.stdout.write("\033[F")
-                sys.stdout.write("\033[K") 
+                sys.stdout.write("\033[K")
+                i += 1
             else:
                 print ('\033[31m' + "Proxy is working..." + '\033[0m')
                 options = Options()
@@ -159,13 +164,10 @@ while (True):
         else:
             rngusername = randomStringDigits(13)
     is_site_loading = True
-    #if "Select Your ProtonMail Account Type" in driver.page_source:
-        #is_site_loading = False
     while(is_site_loading):
         try:
             driver.set_page_load_timeout(8)
             driver.get(url)
-            #driver.implicitly_wait(5)
             if "Select Your ProtonMail Account Type" in driver.page_source:
                 is_site_loading = False
 
