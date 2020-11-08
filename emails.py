@@ -250,16 +250,10 @@ while (True):
     time.sleep(6)
 
     print('\033[31m' + "What type of verification do you want to use?" + '\033[0m')
-<<<<<<< HEAD
-    print('\033[31m' + "(1) Email verification" + '\033[0m')
-    print('\033[31m' + "(2) Captcha verification" + '\033[0m')
-    verifymethod = input('\033[31m' + "Enter Verification Method: " + '\033[0m')
-=======
     print('\033[31m' + "(1) Automatic Email verification" + '\033[0m')
     print('\033[31m' + "(2) Manual Email verification" + '\033[0m')
     print('\033[31m' + "(3) Captcha verification" + '\033[0m')
     verifymethod = input('\033[31m' + "Pick an verification option: " + '\033[0m')
->>>>>>> 83c0bfabe03b24e43006a7f3238225acc6faf7cf
     if verifymethod == "1":
         get_response = requests.get("https://lazy-mail.com/mailbox/create/random")
         csrf_token = get_response.text.split("input type=\"hidden\" name=\"_token\" value=\"")[1].split("\"")[0]
