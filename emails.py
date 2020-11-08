@@ -43,11 +43,11 @@ print ('\033[31m' + """\
 
 print ('\033[31m' + "Auto Account Creator Script" + '\033[0m')
 print('\033[31m' + "Pick a proxy option:" + '\033[0m')
-print('\033[31m' + "(1) - Crawl Free Proxies" + '\033[0m')
-print('\033[31m' + "(2) - Load from file (recommended)" + '\033[0m')
+print('\033[31m' + "(1) - Crawl Free Proxies (recommended)" + '\033[0m')
+print('\033[31m' + "(2) - Load from file" + '\033[0m')
 print('\033[31m' + "(3) - No Proxy (experimental)" + '\033[0m')
 proxy_option = input('\033[31m' + "Enter you option number: " + '\033[0m')
-sys.stdout.write("\033[F")
+sys.stdout.write("\033[F") 
 sys.stdout.write("\033[K") 
 sys.stdout.write("\033[F")
 sys.stdout.write("\033[K")
@@ -61,10 +61,10 @@ while (restart2 > 1):
     verifymail = input('\033[31m' + "Enter Email Adress for Verification: " + '\033[0m')
 
     # Pick an email for Notification. Replace 'YourEmail@Mail.com' with an email adress. (You can use 10min mail for this)
-    notifymail = input('\033[31m' + "(Optional - Enter 'x' do dismiss) Enter Email Adress for Recovery: " + '\033[0m') 
+    notifymail = input('\033[31m' + "(Optional) Enter Email Adress for Recovery: " + '\033[0m') 
 
 
-    if proxy_option == "2":
+    if proxy_option == "1":
         sys.stdout.write("\033[F")
         sys.stdout.write("\033[K") 
         sys.stdout.write("\033[F")
@@ -191,7 +191,7 @@ while (restart2 > 1):
 
     time.sleep(1)
 
-    if notifymail == "x":
+    if notifymail == "x" or notifymail == "":
         notifymail = "mail@mail.com"
     else:
         pass
@@ -206,7 +206,7 @@ while (restart2 > 1):
     print('\033[31m' + "What type of verification do you want to use?" + '\033[0m')
     print('\033[31m' + "(1) Email verification" + '\033[0m')
     print('\033[31m' + "(2) Captcha verification" + '\033[0m')
-    verifymethod = input('\033[31m' + "Enter Email Adress for Verification: " + '\033[0m')
+    verifymethod = input('\033[31m' + "Enter Verification Method: " + '\033[0m')
     if verifymethod == "1":
         driver.find_element_by_id('id-signup-radio-email').click()
 
