@@ -4,7 +4,7 @@
 
 🏗 Manage your free ProtonMail Accounts. 🏗
 
-📌 Ver. 1.0.1 📌
+📌 Ver. 1.0.2 📌
 
 🤖 Full Proxy Support 🤖
 

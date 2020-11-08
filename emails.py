@@ -1,7 +1,7 @@
 # 🚀 This Project is in it's early stages of Development.
 # 📌 Working on new features and main menu.
 # ⚠️ Any Questions or Suggestions please Mail to: hendriksdevmail@gmail.com
-# 🖥 Version: 1.0.0
+# 🖥 Version: 1.0.2
 
 from selenium import webdriver
 from colorama import Fore, Back, Style
