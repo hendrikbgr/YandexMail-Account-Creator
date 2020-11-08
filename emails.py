@@ -80,8 +80,8 @@ while (True):
                 proxy_host = proxygrab.host
                 proxy_port = proxygrab.port
                 proxy_auth = ":"
-                proxies = {'http':'http://{}@{}:{}/'.format(proxy_auth, proxy_host, proxy_port)}
-                requests.get("http://protonmail.com/", proxies=proxies, timeout=3.5)
+                proxies_file = {'http':'http://{}@{}:{}/'.format(proxy_auth, proxy_host, proxy_port)}
+                requests.get("http://protonmail.com/", proxies=proxies_file, timeout=3.5)
 
             except OSError:
                 print ('\033[31m' + "Proxy Connection error!" + '\033[0m')
