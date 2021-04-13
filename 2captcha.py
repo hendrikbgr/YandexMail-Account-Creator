@@ -1,0 +1,1 @@
+key = "YOUR 2CPATCHA API KEY"
