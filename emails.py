@@ -15,6 +15,7 @@ from proxyscrape import create_collector
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import WebDriverException, TimeoutException
 import os
+from faker import Faker
 clear = lambda: os.system('clear')
 clear()
 i = 0
@@ -149,12 +150,9 @@ while (True):
 
     url = 'http://protonmail.com/signup'
 
-    def randomStringDigits(stringLength=13):
-        # Generate a random string of letters and digits
-        lettersAndDigits = string.ascii_letters + string.digits
-        return ''.join(random.choice(lettersAndDigits) for i in range(stringLength))
-    rngusername = randomStringDigits(13)
-    rngpassword = randomStringDigits(15)
+    fake = Faker()
+    rngusername = f'{fake.unique.first_name()}{random.randint(1000,9999)}'
+    rngpassword = f'{random.randint(10000,99999)}{fake.unique.first_name()}'
     username_used = True
     while(username_used):
         headers = {"x-pm-apiversion" : "3", "x-pm-appversion" : "Web_3.16.33"}
