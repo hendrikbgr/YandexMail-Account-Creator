@@ -23,11 +23,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 Any problems with running the script and any questions please cantact me via Twitter [@hendrik_bgr](https://twitter.com/Hendrik_bgr)
 
-<div align="center">
-<a href="http://www.gramscript.com" target="_blank">
-<img src="./img/img.jpg" alt="alt text" width="200px">
-</a>
-</div>
+<a href="https://www.buymeacoffee.com/hendrikbgr" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
 
 ### Prerequisites
 
