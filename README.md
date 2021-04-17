@@ -1,10 +1,10 @@
-# ProtonMail Account Creator
+# Yandex Account Creator
 
-🚀 Create endless amounts of free ProtonMail Accounts. 🚀
+🚀 Create endless amounts of free Yandex Accounts. 🚀
 
-🏗 Manage your free ProtonMail Accounts. 🏗
+🏗 Manage your free Yandex Accounts. 🏗
 
-📌 Ver. 1.0.2 📌
+📌 Ver. 0.1 Beta 📌
 
 🤖 Full Proxy Support 🤖
 
@@ -12,28 +12,42 @@
 
 * Random inputs for Username & Password ✏️
 * Save Account details after Creation in .cvs file 🧾
-* Use CrawledProxies or use proxy file 🤫
 * Full Auto Account Creation 🤖
 
 ## Getting Started
 
-This script can create ProtonMail Free Mail Accoiunts with the usage of free crawled proxies which are getting tested before usage. 
+This script can create Yandex Free Mail Accoiunts with the usage of free crawled proxies which are getting tested before usage. 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Support 👨‍💻
 
 Any problems with running the script and any questions please cantact me via Twitter [@hendrik_bgr](https://twitter.com/Hendrik_bgr)
 
+<div align="center">
+<a href="http://www.gramscript.com" target="_blank">
+<img src="./img/img.jpg" alt="alt text" width="200px">
+</a>
+</div>
+
 ### Prerequisites
 
-Download the latest version of the 'chromedriver' and place it in the 'driver' folder insde of the project folder.
+Download the latest version of the 'chromedriver' and place it in the project folder.
 
 You need python 3 installed on your System.
+
+#### Before We get started
+
+You will need to have access to 2Captcha and some Premium Proxies. 
+Get your 2Captcha Access here: [2Captcha](https://2captcha.com?from=11504913)
+Get cheat Premium proxies here: [Webshare](https://www.webshare.io/?referral_code=ice0nzm10avc)
+
+Once you are registed with both services you need to place your 2Captcha API key into the captcha_config.py file
+After that place your proxies in proxy_config.py (ip:port:username:password)
 
 Get a copy of the Project. Open your Terminal and enter:
 
 ```
-git clone https://github.com/hendrikbgr/ProtonMail-Account-Creator
+git clone https://github.com/hendrikbgr/YandexMail-Account-Creator
 ```
 
 To install all needed requirements run the following command in the project directory:
@@ -51,25 +65,8 @@ To run this script open your Terminal in the project directory.
 To start the Email Creator Script enter:
 
 ```
-python emails.py
+python auto_email_list.py
 ```
-
-To start the auto Login Script enter:
-
-```
-python login.py
-```
-
-(Still in Development)
-To start the Password changer Script enter:
-
-```
-python newpassword.py
-```
-
-## Built With
-
-* [ProxyScraper](https://github.com/JaredLGillespie/proxyscrape) - Tool for Proxy Scraping
 
 ## Authors
 
