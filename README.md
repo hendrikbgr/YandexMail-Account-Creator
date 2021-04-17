@@ -16,7 +16,8 @@
 
 ## Getting Started
 
-This script can create Yandex Free Mail Accoiunts with the usage of free crawled proxies which are getting tested before usage. 
+This script can create Yandex Free Mail Accoiunts with the usage of free crawled proxies which are getting tested before usage.
+
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Support 👨‍💻
@@ -35,10 +36,13 @@ You need python 3 installed on your System.
 #### Before We get started
 
 You will need to have access to 2Captcha and some Premium Proxies. 
+
 Get your 2Captcha Access here: [2Captcha](https://2captcha.com?from=11504913)
+
 Get cheat Premium proxies here: [Webshare](https://www.webshare.io/?referral_code=ice0nzm10avc)
 
 Once you are registed with both services you need to place your 2Captcha API key into the captcha_config.py file
+
 After that place your proxies in proxy_config.py (ip:port:username:password)
 
 Get a copy of the Project. Open your Terminal and enter:
@@ -82,11 +86,9 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Add random username and password. ✅
 * Print account details to in console ✅
 * Add more information to console when running ✅
-* Add ProxyScrape for Porxy Support ✅
-* Create requirements.txt file for easy installation ✅
-* Use 10 Minute Mail Api for verification and recovery email (paid service)
+* Create requirements.txt file for easy installation ⚠️
 
 ## Known Bugs 🐛
 
-* Verification process still needs to be done manually. ⚠️
+* Script Crashes when captcha is wrong ⚠️
 
