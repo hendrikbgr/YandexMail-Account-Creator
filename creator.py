@@ -24,7 +24,8 @@ import undetected_chromedriver as uc
 from faker import Faker
 import captcha_config
 import proxy_config
-
+clear = lambda: os.system('clear')
+clear()
 i = 0
 collector = create_collector('my-collector', 'https')
 
