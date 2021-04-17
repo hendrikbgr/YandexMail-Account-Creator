@@ -50,11 +50,7 @@ print ('\033[31m' + """\
 print ('\033[31m' + "Auto Account Creator Script" + '\033[0m')
 proxynum = 0
 for proxy in proxy_config.proxy:
-    # Pick an email for Verification. Replace 'YourEmail@Mail.com' with an email adress. (You can use 10min mail for this)
-    verifymail = "x"
 
-    # Pick an email for Notification. Replace 'YourEmail@Mail.com' with an email adress. (You can use 10min mail for this)
-    notifymail = ""
     proxy = proxy_config.proxy[proxynum].split(":")
     PROXY_HOST = proxy[0]
     PROXY_PORT = proxy[1]
@@ -144,8 +140,6 @@ for proxy in proxy_config.proxy:
     print('\033[92m' + 'Proxy: ' + '\033[92m', proxylist[proxynum])
 
     warnings.filterwarnings("ignore", category=DeprecationWarning) 
-
-    # Change Path to Chrome Driver Path (or move your ChromeDriver into the project folder)
 
     url = 'https://passport.yandex.com/registration'
 
