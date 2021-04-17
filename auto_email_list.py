@@ -214,12 +214,8 @@ for proxy in proxy_config.proxy:
         time.sleep(1)
 
         time.sleep(6)
-
-        print('Using ' + captcha.__name__ + ' version: ' + str(captcha.__version__) + ' loaded from ' + str(captcha.__path__))
         solver = captcha.TwoCaptcha(captcha_config.key)
-        
-        print('Solver has attribute normal: ' + str(hasattr(solver,'normal')))
-        print('Attribute normal is callbable: ' + str(callable(getattr(solver, 'normal'))))
+
         img = driver.find_element_by_class_name("captcha__image")
         src = img.get_attribute('src')
         img = requests.get(src)
@@ -233,10 +229,9 @@ for proxy in proxy_config.proxy:
             print(e)
         
         else:
-            print('solved: ' + str(result))
+            pass
         finalResult = str(result['code'])
         os.remove('captcha.jpg')
-        print('\033[92m' + 'ReCapchta Success! Now signing up...' + '\033[92m')
         time.sleep(1)
         try:
             driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[2]/button').click()
