@@ -66,7 +66,7 @@ To run this script open your Terminal in the project directory.
 To start the Email Creator Script enter:
 
 ```
-python auto_email_list.py
+python creator.py
 ```
 
 ## Authors
