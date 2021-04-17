@@ -115,7 +115,7 @@ for proxy in proxy_config.proxy:
     """ % (PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASS)
     
     uc.install(
-        executable_path='driver/chromedriver.exe',
+        executable_path='chromedriver.exe',
     )
     options = uc.ChromeOptions()
     pluginfile = 'proxy_auth_plugin.zip'
