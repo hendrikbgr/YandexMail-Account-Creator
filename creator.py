@@ -138,7 +138,7 @@ for proxy in proxy_config.proxy:
         "excludeSwitches", ["enable-automation", "enable-logging"])
     options.add_experimental_option('useAutomationExtension', False)
     driver = uc.Chrome(options=options)
-    print('\033[92m' + 'Proxy: ' + '\033[92m', proxylist[proxynum])
+    print('\033[92m' + 'Proxy: ' + '\033[92m', proxy_config.proxy[proxynum])
 
     warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
