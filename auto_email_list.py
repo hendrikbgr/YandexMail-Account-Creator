@@ -23,6 +23,7 @@ from selenium.common.exceptions import WebDriverException, NoSuchElementExceptio
 import undetected_chromedriver as uc
 from faker import Faker
 import captcha_config
+import proxy_config
 clear = lambda: os.system('clear')
 clear()
 i = 0
