@@ -1,7 +1,7 @@
 # 🚀 This Project is in it's early stages of Development.
 # 📌 Working on new features and main menu.
 # ⚠️ Any Questions or Suggestions please Mail to: hendriksdevmail@gmail.com
-# 🖥 Version: 1.0.2
+# 🖥 Version: 0.1 Beta
 
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
@@ -24,8 +24,7 @@ import undetected_chromedriver as uc
 from faker import Faker
 import captcha_config
 import proxy_config
-clear = lambda: os.system('clear')
-clear()
+
 i = 0
 collector = create_collector('my-collector', 'https')
 
