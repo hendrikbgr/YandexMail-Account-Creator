@@ -6,17 +6,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
-import sys
-import os
+import sys,os,warnings,zipfile,time,random,string,requests,csv,captcha_config,proxy_config
 import twocaptcha as captcha
-import warnings
-import zipfile
-import time
-import random
 from random import choice
-import string
-import requests
-import csv
 from proxyscrape import create_collector
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import WebDriverException, NoSuchElementException, InvalidSessionIdException, TimeoutException
@@ -24,7 +16,11 @@ import undetected_chromedriver as uc
 from faker import Faker
 import captcha_config
 import proxy_config
-clear = lambda: os.system('clear')
+
+
+def clear():
+    os.system('cls' if os.name == 'nt' else 'echo -e \\\\033c') #clearing the screen
+  
 clear()
 i = 0
 collector = create_collector('my-collector', 'https')
