@@ -16,11 +16,12 @@ import undetected_chromedriver as uc
 from faker import Faker
 import captcha_config
 import proxy_config
+from plugin_config import manifest_json, background_js
 
 
 def clear():
     os.system('cls' if os.name == 'nt' else 'echo -e \\\\033c') #clearing the screen
-  
+
 clear()
 i = 0
 collector = create_collector('my-collector', 'https')
@@ -28,84 +29,32 @@ collector = create_collector('my-collector', 'https')
 print ('\033[31m' + """\
     __  ___      _ __
    /  |/  /___ _(_) /
-  / /|_/ / __ `/ / / 
- / /  / / /_/ / / /  
-/_/  /_/\__,_/_/_/   
-                                                      
-    ___                               __ 
+  / /|_/ / __ `/ / /
+ / /  / / /_/ / / /
+/_/  /_/\__,_/_/_/
+
+    ___                               __
    /   | ______________  __  ______  / /_
   / /| |/ ___/ ___/ __ \/ / / / __ \/ __/
- / ___ / /__/ /__/ /_/ / /_/ / / / / /_  
-/_/  |_\___/\___/\____/\__,_/_/ /_/\__/  
-                                         
-   ______                __            
+ / ___ / /__/ /__/ /_/ / /_/ / / / / /_
+/_/  |_\___/\___/\____/\__,_/_/ /_/\__/
+
+   ______                __
   / ____/_______  ____ _/ /_____  _____
  / /   / ___/ _ \/ __ `/ __/ __ \/ ___/
-/ /___/ /  /  __/ /_/ / /_/ /_/ / /    
-\____/_/   \___/\__,_/\__/\____/_/     
+/ /___/ /  /  __/ /_/ / /_/ /_/ / /
+\____/_/   \___/\__,_/\__/\____/_/
 """ + '\033[0m')
 print ('\033[31m' + "Auto Account Creator Script" + '\033[0m')
-proxynum = 0
+
 for proxy in proxy_config.proxy:
 
-    proxy = proxy_config.proxy[proxynum].split(":")
-    PROXY_HOST = proxy[0]
-    PROXY_PORT = proxy[1]
-    PROXY_USER = proxy[2]
-    PROXY_PASS = proxy[3]
+    proxy_split = proxy.split(":")
+    PROXY_HOST = proxy_split[0]
+    PROXY_PORT = proxy_split[1]
+    PROXY_USER = proxy_split[2]
+    PROXY_PASS = proxy_split[3]
 
-    manifest_json = """
-    {
-        "version": "1.0.0",
-        "manifest_version": 2,
-        "name": "Chrome Proxy",
-        "permissions": [
-            "proxy",
-            "tabs",
-            "unlimitedStorage",
-            "storage",
-            "<all_urls>",
-            "webRequest",
-            "webRequestBlocking"
-        ],
-        "background": {
-            "scripts": ["background.js"]
-        },
-        "minimum_chrome_version":"22.0.0"
-    }
-    """
-
-    background_js = """
-    var config = {
-            mode: "fixed_servers",
-            rules: {
-            singleProxy: {
-                scheme: "http",
-                host: "%s",
-                port: parseInt(%s)
-            },
-            bypassList: ["localhost"]
-            }
-        };
-
-    chrome.proxy.settings.set({value: config, scope: "regular"}, function() {});
-
-    function callbackFn(details) {
-        return {
-            authCredentials: {
-                username: "%s",
-                password: "%s"
-            }
-        };
-    }
-
-    chrome.webRequest.onAuthRequired.addListener(
-                callbackFn,
-                {urls: ["<all_urls>"]},
-                ['blocking']
-    );
-    """ % (PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASS)
-    
     uc.install(
         executable_path='chromedriver.exe',
     )
@@ -113,7 +62,7 @@ for proxy in proxy_config.proxy:
     pluginfile = 'proxy_auth_plugin.zip'
     with zipfile.ZipFile(pluginfile, 'w') as zp:
         zp.writestr("manifest.json", manifest_json)
-        zp.writestr("background.js", background_js)
+        zp.writestr("background.js", background_js % (PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASS))
     options.add_extension(pluginfile)
     prefs = {"profile.default_content_setting_values.notifications" : 2}
     options.add_experimental_option("prefs",prefs)
@@ -134,9 +83,9 @@ for proxy in proxy_config.proxy:
         "excludeSwitches", ["enable-automation", "enable-logging"])
     options.add_experimental_option('useAutomationExtension', False)
     driver = uc.Chrome(options=options)
-    print('\033[92m' + 'Proxy: ' + '\033[92m', proxy_config.proxy[proxynum])
+    print('\033[92m' + 'Proxy: ' + '\033[92m', proxy)
 
-    warnings.filterwarnings("ignore", category=DeprecationWarning) 
+    warnings.filterwarnings("ignore", category=DeprecationWarning)
 
     url = 'https://passport.yandex.com/registration'
 
@@ -165,35 +114,34 @@ for proxy in proxy_config.proxy:
             is_site_loading = False
 
         except (NoSuchElementException, WebDriverException, InvalidSessionIdException) as e:
-            proxynum += 1
             site_loaded = 'false'
             is_site_loading = False
     if site_loaded == 'success':
-        
+
         # Username pick
-        driver.find_element_by_xpath('/html/body/div/div/div[2]/div/main/div/div/div/form/div[1]/div[3]/span/input').send_keys(rngusername)
+        driver.find_element_by_xpath('//*[@id="login"]').send_keys(rngusername)
 
         time.sleep(1)
-        
+
         time.sleep(1)
         # First and Last name pick
-        driver.find_element_by_xpath('/html/body/div/div/div[2]/div/main/div/div/div/form/div[1]/div[1]/span/input').send_keys(fakeFirstName)
-        
+        driver.find_element_by_xpath('//*[@id="firstname"]').send_keys(fakeFirstName)
+
         time.sleep(1)
 
-        driver.find_element_by_xpath('/html/body/div/div/div[2]/div/main/div/div/div/form/div[1]/div[2]/span[1]/input').send_keys(fakeLastName)
+        driver.find_element_by_xpath('//*[@id="lastname"]').send_keys(fakeLastName)
 
         time.sleep(1)
 
         # Password pick
-        driver.find_element_by_xpath('/html/body/div/div/div[2]/div/main/div/div/div/form/div[2]/div[1]/span/input').send_keys(rngpassword)
+        driver.find_element_by_xpath('//*[@id="password"]').send_keys(rngpassword)
 
         time.sleep(1)
 
-        driver.find_element_by_xpath('/html/body/div/div/div[2]/div/main/div/div/div/form/div[2]/div[2]/span/input').send_keys(rngpassword)
+        driver.find_element_by_xpath('//*[@id="password_confirm"]').send_keys(rngpassword)
 
         time.sleep(1)
-        
+
         # Password recovery pick
         driver.find_element_by_xpath('/html/body/div/div/div[2]/div/main/div/div/div/form/div[3]/div/div[2]/div/div[1]/span').click()
 
@@ -212,13 +160,13 @@ for proxy in proxy_config.proxy:
         img = requests.get(src)
         with open('captcha.jpg', 'wb') as f:
             f.write(img.content)
-        
+
         try:
             result = solver.normal('captcha.jpg') # change to your image path
-        
+
         except Exception as e:
             print(e)
-        
+
         else:
             pass
         finalResult = str(result['code'])
@@ -250,11 +198,9 @@ for proxy in proxy_config.proxy:
             writer.writerows(csvData)
         csvFile.close()
         print ('\033[31m' + 'Great! We added you account details to the table.' + '\033[0m')
-        proxynum += 1
         time.sleep(8)
         driver.close()
         '''except (NoSuchElementException, WebDriverException) as e:
-            proxynum += 1
             driver.close()
             print ('\033[31m' + 'No Recapchta possible...' + '\033[0m')
             print ('\033[31m' + 'Trying next proxy...' + '\033[0m')
