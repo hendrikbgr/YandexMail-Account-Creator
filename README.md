@@ -16,7 +16,7 @@
 
 ## Getting Started
 
-This script can create Yandex Free Mail Accoiunts with the usage of free crawled proxies which are getting tested before usage.
+This script can create Yandex Free Mail Accounts with the usage of proxies.
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
@@ -29,9 +29,7 @@ Any problems with running the script and any questions please cantact me via Twi
 
 ### Prerequisites
 
-Download the latest version of the 'chromedriver' and place it in the project folder.
-
-You need python 3 installed on your System.
+* Python 3.6+
 
 #### Before We get started
 
@@ -39,9 +37,9 @@ You will need to have access to 2Captcha and some Premium Proxies.
 
 Get your 2Captcha Access here: [2Captcha](https://2captcha.com?from=11504913)
 
-Get cheat Premium proxies here: [Webshare](https://www.webshare.io/?referral_code=ice0nzm10avc)
+Get cheap Premium proxies here: [Webshare](https://www.webshare.io/?referral_code=ice0nzm10avc)
 
-Once you are registed with both services you need to place your 2Captcha API key into the captcha_config.py file
+Once you are registered with both services you need to place your 2Captcha API key into the captcha_config.py file
 
 After that place your proxies in proxy_config.py (ip:port:username:password)
 
@@ -57,13 +55,13 @@ To install all needed requirements run the following command in the project dire
 pip install -r requirements.txt
 ```
 
-After that you can proceed to edit the Script.
+After that you can proceed to start the Script.
 
 ## Running 🏃🏽‍♂️
 
 To run this script open your Terminal in the project directory.
 
-To start the Email Creator Script enter:
+To start the Account Creator Script enter:
 
 ```
 python creator.py
@@ -86,9 +84,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Add random username and password. ✅
 * Print account details to in console ✅
 * Add more information to console when running ✅
-* Create requirements.txt file for easy installation ⚠️
+* Create requirements.txt file for easy installation ✅
+* Script Crashes when captcha is wrong ✅
 
-## Known Bugs 🐛
 
-* Script Crashes when captcha is wrong ⚠️
 

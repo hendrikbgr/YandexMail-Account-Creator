@@ -3,30 +3,46 @@
 # ⚠️ Any Questions or Suggestions please Mail to: hendriksdevmail@gmail.com
 # 🖥 Version: 0.1 Beta
 
-from selenium import webdriver
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
-import sys,os,warnings,zipfile,time,random,string,requests,csv,captcha_config,proxy_config
-import twocaptcha as captcha
-from random import choice
-from proxyscrape import create_collector
-from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import WebDriverException, NoSuchElementException, InvalidSessionIdException, TimeoutException
+import csv
+import os
+import platform
+import random
+import string
+import subprocess
+import sys
+import time
+import warnings
+import zipfile
+from random import choice, uniform
+from time import sleep
+
+import requests
 import undetected_chromedriver as uc
+from fake_headers import Headers
 from faker import Faker
+from selenium import webdriver
+from selenium.common.exceptions import (InvalidSessionIdException,
+                                        NoSuchElementException,
+                                        WebDriverException)
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from twocaptcha import TwoCaptcha
+
 import captcha_config
 import proxy_config
-from plugin_config import manifest_json, background_js
+from plugin_config import background_js, manifest_json
 
 
 def clear():
-    os.system('cls' if os.name == 'nt' else 'echo -e \\\\033c') #clearing the screen
+    # clearing the screen
+    os.system('cls' if os.name == 'nt' else 'echo -e \\\\033c')
+
 
 clear()
 i = 0
-collector = create_collector('my-collector', 'https')
 
-print ('\033[31m' + """\
+print('\033[31m' + """\
     __  ___      _ __
    /  |/  /___ _(_) /
   / /|_/ / __ `/ / /
@@ -45,7 +61,49 @@ print ('\033[31m' + """\
 / /___/ /  /  __/ /_/ / /_/ /_/ / /
 \____/_/   \___/\__,_/\__/\____/_/
 """ + '\033[0m')
-print ('\033[31m' + "Auto Account Creator Script" + '\033[0m')
+
+print('\033[31m' + "Auto Account Creator Script" + '\033[0m')
+
+print('\033[92m' + "Getting Chrome driver..." + '\033[0m')
+
+OSNAME = platform.system()
+
+if OSNAME == 'Linux':
+    OSNAME = 'lin'
+    with subprocess.Popen(['google-chrome', '--version'], stdout=subprocess.PIPE) as proc:
+        version = proc.stdout.read().decode('utf-8').replace('Google Chrome', '').strip()
+elif OSNAME == 'Darwin':
+    OSNAME = 'mac'
+    process = subprocess.Popen(
+        ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '--version'], stdout=subprocess.PIPE)
+    version = process.communicate()[0].decode(
+        'UTF-8').replace('Google Chrome', '').strip()
+elif OSNAME == 'Windows':
+    OSNAME = 'win'
+    process = subprocess.Popen(
+        ['reg', 'query', 'HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon', '/v', 'version'],
+        stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL
+    )
+    version = process.communicate()[0].decode('UTF-8').strip().split()[-1]
+else:
+    print('{} OS is not supported.'.format(OSNAME))
+    sys.exit()
+
+major_version = version.split('.')[0]
+
+uc.TARGET_VERSION = major_version
+
+uc.install()
+
+
+def type_me(element, text):
+    """
+    Type like a human
+    """
+    for letter in text:
+        element.send_keys(letter)
+        sleep(uniform(.1, .3))
+
 
 for proxy in proxy_config.proxy:
 
@@ -55,17 +113,22 @@ for proxy in proxy_config.proxy:
     PROXY_USER = proxy_split[2]
     PROXY_PASS = proxy_split[3]
 
-    uc.install(
-        executable_path='chromedriver.exe',
-    )
-    options = uc.ChromeOptions()
+    header = Headers(
+        browser="chrome",
+        os=OSNAME,
+        headers=False
+    ).generate()
+    agent = header['User-Agent']
+
+    options = webdriver.ChromeOptions()
     pluginfile = 'proxy_auth_plugin.zip'
     with zipfile.ZipFile(pluginfile, 'w') as zp:
         zp.writestr("manifest.json", manifest_json)
-        zp.writestr("background.js", background_js % (PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASS))
+        zp.writestr("background.js", background_js %
+                    (PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASS))
     options.add_extension(pluginfile)
-    prefs = {"profile.default_content_setting_values.notifications" : 2}
-    options.add_experimental_option("prefs",prefs)
+    prefs = {"profile.default_content_setting_values.notifications": 2}
+    options.add_experimental_option("prefs", prefs)
     options.add_experimental_option('prefs', {
         'credentials_enable_service': False,
         'profile': {
@@ -82,8 +145,12 @@ for proxy in proxy_config.proxy:
     options.add_experimental_option(
         "excludeSwitches", ["enable-automation", "enable-logging"])
     options.add_experimental_option('useAutomationExtension', False)
-    driver = uc.Chrome(options=options)
-    print('\033[92m' + 'Proxy: ' + '\033[92m', proxy)
+    options.add_argument(f"user-agent={agent}")
+    driver = webdriver.Chrome(options=options)
+
+    wait = WebDriverWait(driver, 40)
+
+    print('\033[92m' + f'Proxy: {proxy}' + '\033[0m')
 
     warnings.filterwarnings("ignore", category=DeprecationWarning)
 
@@ -91,6 +158,7 @@ for proxy in proxy_config.proxy:
 
     fake = Faker()
     rngusername = f'{fake.unique.first_name()}{random.randint(100000,999999)}'
+    recoveryname = f'{fake.unique.first_name()}{random.randint(100000,999999)}'
     rngpassword = f'{random.randint(10000,99999)}{fake.unique.first_name()}{random.randint(10000,99999)}'
     fakeFirstName = f'{fake.unique.first_name()}'
     fakeLastName = f'{fake.unique.last_name()}'
@@ -108,103 +176,119 @@ for proxy in proxy_config.proxy:
     while(is_site_loading):
         try:
             driver.get(url)
-            driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+            driver.execute_script(
+                "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
             time.sleep(5)
-            loading_yes = driver.find_element_by_xpath('/html/body/div/div/div[2]/div/main/div/div/div/div/h1')
+            loading_yes = driver.find_element_by_xpath(
+                '/html/body/div/div/div[2]/div/main/div/div/div/div/h1')
             is_site_loading = False
 
         except (NoSuchElementException, WebDriverException, InvalidSessionIdException) as e:
             site_loaded = 'false'
             is_site_loading = False
+
     if site_loaded == 'success':
 
         # Username pick
-        driver.find_element_by_xpath('//*[@id="login"]').send_keys(rngusername)
+        user = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '//*[@id="login"]')))
+        type_me(user, rngusername)
 
-        time.sleep(1)
-
-        time.sleep(1)
         # First and Last name pick
-        driver.find_element_by_xpath('//*[@id="firstname"]').send_keys(fakeFirstName)
+        first = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '//*[@id="firstname"]')))
+        type_me(first, fakeFirstName)
 
-        time.sleep(1)
-
-        driver.find_element_by_xpath('//*[@id="lastname"]').send_keys(fakeLastName)
-
-        time.sleep(1)
+        last = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '//*[@id="lastname"]')))
+        type_me(last, fakeLastName)
 
         # Password pick
-        driver.find_element_by_xpath('//*[@id="password"]').send_keys(rngpassword)
+        password = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '//*[@id="password"]')))
+        type_me(password, rngpassword)
 
-        time.sleep(1)
-
-        driver.find_element_by_xpath('//*[@id="password_confirm"]').send_keys(rngpassword)
-
-        time.sleep(1)
+        confirm = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '//*[@id="password_confirm"]')))
+        type_me(confirm, rngpassword)
 
         # Password recovery pick
-        driver.find_element_by_xpath('/html/body/div/div/div[2]/div/main/div/div/div/form/div[3]/div/div[2]/div/div[1]/span').click()
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div/div/div[2]/div/main/div/div/div/form/div[3]/div/div[2]/div/div[1]/span'))).click()
 
-        time.sleep(2)
+        recovery = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div/div/div[2]/div/main/div/div/div/form/div[3]/div/div[1]/div[2]/span/input')))
+        type_me(recovery, recoveryname)
 
-        driver.find_element_by_xpath('/html/body/div/div/div[2]/div/main/div/div/div/form/div[3]/div/div[1]/div[2]/span/input').send_keys(rngusername)
+        solver = TwoCaptcha(captcha_config.key)
 
-
-        time.sleep(1)
-
-        time.sleep(6)
-        solver = captcha.TwoCaptcha(captcha_config.key)
-
-        img = driver.find_element_by_class_name("captcha__image")
+        img = wait.until(EC.visibility_of_element_located(
+            (By.CLASS_NAME, 'captcha__image')))
         src = img.get_attribute('src')
         img = requests.get(src)
         with open('captcha.jpg', 'wb') as f:
             f.write(img.content)
 
         try:
-            result = solver.normal('captcha.jpg') # change to your image path
+            result = solver.normal('captcha.jpg')  # change to your image path
+
+            finalResult = str(result['code'])
+            os.remove('captcha.jpg')
+            time.sleep(1)
+            try:
+                wait.until(EC.element_to_be_clickable(
+                    (By.XPATH, '/html/body/div[2]/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[2]/button'))).click()
+            except (NoSuchElementException, WebDriverException, InvalidSessionIdException) as e:
+                pass
+
+            final = wait.until(EC.element_to_be_clickable(
+                (By.XPATH, '/html/body/div/div/div[2]/div/main/div/div/div/form/div[3]/div/div[2]/div[1]/span/input')))
+            type_me(final, finalResult)
+
+            wait.until(EC.element_to_be_clickable(
+                (By.XPATH, '/html/body/div/div/div[2]/div/main/div/div/div/form/div[4]/span/button'))).click()
+
+            wait.until(EC.element_to_be_clickable(
+                (By.XPATH, '/html/body/div/div/div[2]/div/main/div/div/div/form/div[4]/div/div[2]/div/button'))).click()
+
+            try:
+                wait.until(EC.visibility_of_element_located(
+                    (By.CLASS_NAME, 'error-message')))
+
+                print('\033[31m' + 'Wrong Recapchta ' + '\033[0m')
+                print('\033[31m' + 'Trying next proxy...' + '\033[0m')
+                time.sleep(5)
+                driver.close()
+
+            except:
+                print('\033[31m' + "Your New Email Adress is: ",
+                      rngusername, "@yandex.com", sep='' + '\033[0m')
+                print('\033[31m' + "Your New Email Password is: " +
+                      '\033[0m', rngpassword)
+                print('\033[31m' + "Your New First Name is: " +
+                      '\033[0m', fakeFirstName)
+                print('\033[31m' + "Your New Last Name is: " +
+                      '\033[0m', fakeLastName)
+
+                csvData = [[rngusername + '@yandex.com',
+                            rngpassword, fakeFirstName, fakeLastName]]
+                with open('list.csv', 'a') as csvFile:
+                    writer = csv.writer(csvFile)
+                    writer.writerows(csvData)
+                csvFile.close()
+                print(
+                    '\033[31m' + 'Great! We added you account details to the table.' + '\033[0m')
+                time.sleep(8)
+                driver.close()
 
         except Exception as e:
-            print(e)
-
-        else:
-            pass
-        finalResult = str(result['code'])
-        os.remove('captcha.jpg')
-        time.sleep(1)
-        try:
-            driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[2]/button').click()
-        except (NoSuchElementException, WebDriverException, InvalidSessionIdException) as e:
-            pass
-
-        driver.find_element_by_xpath('/html/body/div/div/div[2]/div/main/div/div/div/form/div[3]/div/div[2]/div[1]/span/input').send_keys(finalResult)
-
-        time.sleep(1)
-
-        driver.find_element_by_xpath('/html/body/div/div/div[2]/div/main/div/div/div/form/div[4]/span/button').click()
-
-        time.sleep(1)
-
-        driver.find_element_by_xpath('/html/body/div/div/div[2]/div/main/div/div/div/form/div[4]/div/div[2]/div/button').click()
-
-        print ('\033[31m' + "Your New Email Adress is: ", rngusername,"@yandex.com", sep='' + '\033[0m')
-        print ('\033[31m' + "Your New Email Password is: "  + '\033[0m' , rngpassword)
-        print ('\033[31m' + "Your New First Name is: "  + '\033[0m' , fakeFirstName)
-        print ('\033[31m' + "Your New Last Name is: "  + '\033[0m' , fakeLastName)
-
-        csvData = [[rngusername + '@yandex.com', rngpassword, fakeFirstName, fakeLastName]]
-        with open('list.csv', 'a') as csvFile:
-            writer = csv.writer(csvFile)
-            writer.writerows(csvData)
-        csvFile.close()
-        print ('\033[31m' + 'Great! We added you account details to the table.' + '\033[0m')
-        time.sleep(8)
-        driver.close()
-        '''except (NoSuchElementException, WebDriverException) as e:
-            driver.close()
-            print ('\033[31m' + 'No Recapchta possible...' + '\033[0m')
-            print ('\033[31m' + 'Trying next proxy...' + '\033[0m')
+            print(str(e))
+            print('\033[31m' + 'No Recapchta possible...' + '\033[0m')
+            print('\033[31m' + 'Trying next proxy...' + '\033[0m')
             time.sleep(5)
-        '''
+            driver.close()
+            pass
+
     else:
-        print ('\033[31m' + 'Trying next proxy...' + '\033[0m')
+        print('\033[31m' + 'Trying next proxy...' + '\033[0m')
+        os.remove('proxy_auth_plugin.zip')
