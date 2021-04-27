@@ -10,7 +10,6 @@ import random
 import string
 import subprocess
 import sys
-import time
 import warnings
 import zipfile
 from random import choice, uniform
@@ -178,7 +177,7 @@ for proxy in proxy_config.proxy:
             driver.get(url)
             driver.execute_script(
                 "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-            time.sleep(5)
+            sleep(5)
             loading_yes = driver.find_element_by_xpath(
                 '/html/body/div/div/div[2]/div/main/div/div/div/div/h1')
             is_site_loading = False
@@ -234,7 +233,7 @@ for proxy in proxy_config.proxy:
 
             finalResult = str(result['code'])
             os.remove('captcha.jpg')
-            time.sleep(1)
+            sleep(1)
             try:
                 wait.until(EC.element_to_be_clickable(
                     (By.XPATH, '/html/body/div[2]/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[2]/button'))).click()
@@ -257,7 +256,7 @@ for proxy in proxy_config.proxy:
 
                 print('\033[31m' + 'Wrong Recapchta ' + '\033[0m')
                 print('\033[31m' + 'Trying next proxy...' + '\033[0m')
-                time.sleep(5)
+                sleep(5)
                 driver.close()
 
             except:
@@ -270,22 +269,22 @@ for proxy in proxy_config.proxy:
                 print('\033[31m' + "Your New Last Name is: " +
                       '\033[0m', fakeLastName)
 
-                csvData = [[rngusername + '@yandex.com',
-                            rngpassword, fakeFirstName, fakeLastName]]
+                csvData = [[rngusername + '@yandex.com', rngpassword,
+                            fakeFirstName, fakeLastName, recoveryname]]
                 with open('list.csv', 'a') as csvFile:
                     writer = csv.writer(csvFile)
                     writer.writerows(csvData)
                 csvFile.close()
                 print(
                     '\033[31m' + 'Great! We added you account details to the table.' + '\033[0m')
-                time.sleep(8)
+                sleep(8)
                 driver.close()
 
         except Exception as e:
             print(str(e))
             print('\033[31m' + 'No Recapchta possible...' + '\033[0m')
             print('\033[31m' + 'Trying next proxy...' + '\033[0m')
-            time.sleep(5)
+            sleep(5)
             driver.close()
             pass
 
