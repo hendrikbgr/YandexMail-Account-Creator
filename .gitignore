@@ -1,3 +1,6 @@
+.vscode
+.venv
+__pycache__
 captcha_config.py
 proxy_config.py
 list.csv
