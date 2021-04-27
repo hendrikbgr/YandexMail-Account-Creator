@@ -67,6 +67,13 @@ To start the Account Creator Script enter:
 python creator.py
 ```
 
+## Output
+
+You will find account details in list.csv in this format.
+
+Email | Password | First Name | Last Name | Security Question
+----- | -------- | ---------- | --------- | -----------------
+
 ## Authors
 
 * **Hendrik Bgr** - *Initial work* - [HendrikBgr](https://github.com/hendrikbgr)
