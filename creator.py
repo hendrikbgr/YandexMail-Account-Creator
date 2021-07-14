@@ -218,6 +218,9 @@ for proxy in proxy_config.proxy:
         recovery = wait.until(EC.element_to_be_clickable(
             (By.XPATH, '/html/body/div/div/div[2]/div/main/div/div/div/form/div[3]/div/div[1]/div[2]/span/input')))
         type_me(recovery, recoveryname)
+        sleep(5)
+        wait.until(EC.element_to_be_clickable(
+            (By.CLASS_NAME, 'captcha__reload'))).click()
 
         solver = TwoCaptcha(captcha_config.key)
 
@@ -268,9 +271,11 @@ for proxy in proxy_config.proxy:
                       '\033[0m', fakeFirstName)
                 print('\033[31m' + "Your New Last Name is: " +
                       '\033[0m', fakeLastName)
+                print('\033[31m' + "Proxy Used: " +
+                      '\033[0m', proxy)
 
                 csvData = [[rngusername + '@yandex.com', rngpassword,
-                            fakeFirstName, fakeLastName, recoveryname]]
+                            fakeFirstName, fakeLastName, recoveryname, proxy]]
                 with open('list.csv', 'a') as csvFile:
                     writer = csv.writer(csvFile)
                     writer.writerows(csvData)
@@ -278,7 +283,6 @@ for proxy in proxy_config.proxy:
                 print(
                     '\033[31m' + 'Great! We added you account details to the table.' + '\033[0m')
                 sleep(8)
-                driver.close()
 
         except Exception as e:
             print(str(e))
@@ -287,6 +291,45 @@ for proxy in proxy_config.proxy:
             sleep(5)
             driver.close()
             pass
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div/div/div[1]/div[2]/main/div/div/div/div[3]/span/a'))).click()
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div/div/div[2]/div[1]/div/div/div/a[1]/div'))).click()
+            
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div/div/div[2]/div[1]/div/div/div/div/ul/ul/li[1]'))).click()
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[9]/div[2]/div[3]'))).click()
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[2]/div[7]/div/div[2]/div/div/div[3]/button[2]'))).click()
+        
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[8]/div[1]/div[2]/a[10]'))).click()
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[2]/div[3]/div/div/div/div[9]/span/a'))).click()
+
+        sleep(5)
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[2]/div/div[5]/div/div/div/div[2]/form/div/div[2]/div[1]/span/span/label/span[1]'))).click()
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[2]/div/div[5]/div/div/div/div[2]/form/div/div[2]/div[3]/div[2]/div[2]/label/span[1]'))).click()
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[2]/div/div[5]/div/div/div/div[2]/form/div/div[3]/div[1]/span/span/label/span[1]'))).click()
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[2]/div/div[5]/div/div/div/div[2]/form/button'))).click()
+        
+        sleep(5)
+
+        driver.close()
 
     else:
         print('\033[31m' + 'Trying next proxy...' + '\033[0m')
