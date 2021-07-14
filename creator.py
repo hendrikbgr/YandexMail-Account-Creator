@@ -14,6 +14,7 @@ import warnings
 import zipfile
 from random import choice, uniform
 from time import sleep
+import clipboard
 
 import requests
 import undetected_chromedriver as uc
@@ -273,13 +274,6 @@ for proxy in proxy_config.proxy:
                       '\033[0m', fakeLastName)
                 print('\033[31m' + "Proxy Used: " +
                       '\033[0m', proxy)
-
-                csvData = [[rngusername + '@yandex.com', rngpassword,
-                            fakeFirstName, fakeLastName, recoveryname, proxy]]
-                with open('list.csv', 'a') as csvFile:
-                    writer = csv.writer(csvFile)
-                    writer.writerows(csvData)
-                csvFile.close()
                 print(
                     '\033[31m' + 'Great! We added you account details to the table.' + '\033[0m')
                 sleep(8)
@@ -327,6 +321,55 @@ for proxy in proxy_config.proxy:
         wait.until(EC.element_to_be_clickable(
             (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[2]/div/div[5]/div/div/div/div[2]/form/button'))).click()
         
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[2]/div[7]/div/div[2]/div/div/div[3]/div/div/a[1]'))).click()
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[2]/div[7]/div/div[2]/div/div/div[3]/div/div/div/ul/ul/li[2]'))).click()
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[1]/div/div[3]/div/div[1]/div/div/div/div[6]/div[2]'))).click()
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div/div/div[3]/div/div[1]/div/div/div/div[4]'))).click()
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div/div/div[3]/div/div[1]/div/div/div/div[4]/div[2]/div[2]/div[2]/div/div[1]/div/span'))).click()
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[2]/div[1]/div/div/div/div/div/div[2]/div/button'))).click()
+            
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[2]/div[1]/div/div/div/div/div/div[3]/div/div[1]/button'))).click()
+        
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[2]/ul/li[1]'))).click()
+
+        appName = 'imapApp'
+
+        final = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[3]/div[1]/span/input')))
+        type_me(final, appName)
+        
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[4]/div/div[1]/button'))).click()
+        
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[1]/div[1]/div/button'))).click()
+
+        sleep(2)
+
+        appPassword = driver.find_element_by_xpath('/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[1]/div[1]/span').text
+
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[2]/div[2]/button'))).click()
+
+        csvData = [[rngusername + '@yandex.com', rngpassword, fakeFirstName, fakeLastName, recoveryname, proxy, appPassword]]
+        with open('list.csv', 'a') as csvFile:
+            writer = csv.writer(csvFile)
+            writer.writerows(csvData)
+        csvFile.close()
+
         sleep(5)
 
         driver.close()
