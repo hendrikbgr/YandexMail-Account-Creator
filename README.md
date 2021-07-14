@@ -72,8 +72,8 @@ python creator.py
 
 You will find account details in list.csv in this format.
 
-Email | Password | First Name | Last Name | Security Question | Proxy Used
------ | -------- | ---------- | --------- | ----------------- | ----------
+Email | Password | First Name | Last Name | Security Question | Proxy Used | App Password (imap)
+----- | -------- | ---------- | --------- | ----------------- | ---------- | -------------------
 
 ## Authors
 
