@@ -14,7 +14,6 @@ import warnings
 import zipfile
 from random import choice, uniform
 from time import sleep
-import clipboard
 
 import requests
 import undetected_chromedriver as uc
