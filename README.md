@@ -13,6 +13,7 @@
 * Random inputs for Username & Password ✏️
 * Save Account details after Creation in .cvs file 🧾
 * Full Auto Account Creation 🤖
+* Enable IMAP & POP3
 
 ## Getting Started
 
@@ -71,8 +72,8 @@ python creator.py
 
 You will find account details in list.csv in this format.
 
-Email | Password | First Name | Last Name | Security Question
------ | -------- | ---------- | --------- | -----------------
+Email | Password | First Name | Last Name | Security Question | Proxy Used
+----- | -------- | ---------- | --------- | ----------------- | ----------
 
 ## Authors
 
