@@ -95,7 +95,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Create requirements.txt file for easy installation ✅
 * Script Crashes when captcha is wrong ✅
 
-# Notes
+#### Notes
 
 This code is for educational use only. 
 
