@@ -137,7 +137,7 @@ for proxy in proxy_config.proxy:
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument("--disable-web-security")
-    viewport = ['2560,1440', '1920,1080', '1440,900']
+    viewport = ['2560,1440', '1920,1080']
     options.add_argument(f"--window-size={choice(viewport)}")
     options.add_argument("--log-level=3")
     options.add_argument('--disable-blink-features=AutomationControlled')
@@ -188,6 +188,12 @@ for proxy in proxy_config.proxy:
 
     if site_loaded == 'success':
 
+        try:
+            wait.until(EC.element_to_be_clickable(
+                (By.XPATH, '/html/body/div[2]/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[2]/button'))).click()
+        except (NoSuchElementException, WebDriverException, InvalidSessionIdException) as e:
+            pass
+
         # Username pick
         user = wait.until(EC.element_to_be_clickable(
             (By.XPATH, '//*[@id="login"]')))
@@ -237,11 +243,6 @@ for proxy in proxy_config.proxy:
             finalResult = str(result['code'])
             os.remove('captcha.jpg')
             sleep(1)
-            try:
-                wait.until(EC.element_to_be_clickable(
-                    (By.XPATH, '/html/body/div[2]/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[2]/button'))).click()
-            except (NoSuchElementException, WebDriverException, InvalidSessionIdException) as e:
-                pass
 
             final = wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '/html/body/div/div/div[2]/div/main/div/div/div/form/div[3]/div/div[2]/div[1]/span/input')))
@@ -275,7 +276,7 @@ for proxy in proxy_config.proxy:
                       '\033[0m', proxy)
                 print(
                     '\033[31m' + 'Great! We added you account details to the table.' + '\033[0m')
-                sleep(8)
+                sleep(2)
 
         except Exception as e:
             print(str(e))
@@ -309,16 +310,13 @@ for proxy in proxy_config.proxy:
         sleep(5)
 
         wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[2]/div/div[5]/div/div/div/div[2]/form/div/div[2]/div[1]/span/span/label/span[1]'))).click()
+            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[3]/div/div[5]/div/div/div/div[2]/form/div/div[2]/div[1]/span/span/label/span[1]'))).click()
 
         wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[2]/div/div[5]/div/div/div/div[2]/form/div/div[2]/div[3]/div[2]/div[2]/label/span[1]'))).click()
+            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[3]/div/div[5]/div/div/div/div[2]/form/div/div[3]/div[1]/span/span/label/span[1]'))).click()
 
         wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[2]/div/div[5]/div/div/div/div[2]/form/div/div[3]/div[1]/span/span/label/span[1]'))).click()
-
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[2]/div/div[5]/div/div/div/div[2]/form/button'))).click()
+            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[3]/div/div[5]/div/div/div/div[2]/form/button'))).click()
         
         wait.until(EC.element_to_be_clickable(
             (By.XPATH, '/html/body/div[2]/div[7]/div/div[2]/div/div/div[3]/div/div/a[1]'))).click()
