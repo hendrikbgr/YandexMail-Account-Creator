@@ -289,60 +289,25 @@ for proxy in proxy_config.proxy:
         wait.until(EC.element_to_be_clickable(
             (By.XPATH, '/html/body/div/div/div[1]/div[2]/main/div/div/div/div[3]/span/a'))).click()
 
+        # Open Passwords accordion
         wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div/div/div[2]/div[1]/div/div/div/a[1]/div'))).click()
-            
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div/div/div[2]/div[1]/div/div/div/div/ul/ul/li[1]'))).click()
-
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[9]/div[2]/div[3]'))).click()
-
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[2]/div[7]/div/div[2]/div/div/div[3]/button[2]'))).click()
-        
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[8]/div[1]/div[2]/a[10]'))).click()
-
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[2]/div[3]/div/div/div/div[9]/span/a'))).click()
+            (By.XPATH, '/html/body/div/div/div[2]/div[3]/main/div/div/div/div[1]/div/div/div/div[4]/div[2]/div[1]/div[2]'))).click()
 
         sleep(5)
 
         wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[3]/div/div[5]/div/div/div/div[2]/form/div/div[2]/div[1]/span/span/label/span[1]'))).click()
-
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[3]/div/div[5]/div/div/div/div[2]/form/div/div[3]/div[1]/span/span/label/span[1]'))).click()
-
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[2]/div[7]/div/div[3]/div[3]/div[3]/div/div[5]/div/div/div/div[2]/form/button'))).click()
-        
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[2]/div[7]/div/div[2]/div/div/div[3]/div/div/a[1]'))).click()
-
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[2]/div[7]/div/div[2]/div/div/div[3]/div/div/div/ul/ul/li[2]'))).click()
-
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[1]/div/div[3]/div/div[1]/div/div/div/div[6]/div[2]'))).click()
-
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div/div/div[3]/div/div[1]/div/div/div/div[4]'))).click()
-
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div/div/div[3]/div/div[1]/div/div/div/div[4]/div[2]/div[2]/div[2]/div/div[1]/div/span'))).click()
+            (By.XPATH, '/html/body/div/div/div[2]/div[3]/main/div/div/div/div[1]/div/div/div/div[4]/div[2]/div[2]/div[3]/div/div[1]/div/span/span'))).click()
 
         wait.until(EC.element_to_be_clickable(
             (By.XPATH, '/html/body/div[2]/div[1]/div/div/div/div/div/div[2]/div/button'))).click()
-            
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[2]/div[1]/div/div/div/div/div/div[3]/div/div[1]/button'))).click()
         
         wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[2]/ul/li[1]'))).click()
+            (By.XPATH, '/html/body/div[2]/div[1]/div/div/div/div/div/div[3]/div/div[1]/button'))).click()
 
-        appName = 'imapApp'
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[2]/ul/li[1]/span[1]/span'))).click()
+
+        appName = 'App for Imap'
 
         final = wait.until(EC.element_to_be_clickable(
             (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[3]/div[1]/span/input')))
@@ -350,10 +315,6 @@ for proxy in proxy_config.proxy:
         
         wait.until(EC.element_to_be_clickable(
             (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[4]/div/div[1]/button'))).click()
-        
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[1]/div[1]/div/button'))).click()
-
         sleep(2)
 
         appPassword = driver.find_element_by_xpath('/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[1]/div[1]/span').text
