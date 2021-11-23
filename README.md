@@ -38,7 +38,8 @@ You will need to have access to 2Captcha and some Premium Proxies.
 
 Get your 2Captcha Access here: [2Captcha](https://2captcha.com?from=11504913)
 
-Get cheap Premium proxies here: [Webshare](https://www.webshare.io/?referral_code=ice0nzm10avc)
+Get cheap Premium proxies here: [Proxy-Cheap](https://app.proxy-cheap.com/r/4l2Djs)
+You will need Static Residential Proxies
 
 Once you are registered with both services you need to place your 2Captcha API key into the captcha_config.py file
 

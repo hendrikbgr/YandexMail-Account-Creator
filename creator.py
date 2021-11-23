@@ -315,7 +315,7 @@ for proxy in proxy_config.proxy:
         
         wait.until(EC.element_to_be_clickable(
             (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[4]/div/div[1]/button'))).click()
-        sleep(2)
+        sleep(4)
 
         appPassword = driver.find_element_by_xpath('/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[1]/div[1]/span').text
 
