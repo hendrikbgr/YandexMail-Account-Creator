@@ -8,6 +8,8 @@
 
 🤖 Full Proxy Support 🤖
 
+## WORKING: SEPTEMBER 2022
+
 ## Features
 
 - Random inputs for Username & Password ✏️
