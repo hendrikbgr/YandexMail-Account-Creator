@@ -31,13 +31,13 @@ Any problems with running the script and any questions please cantact me via Twi
 
 - Python 3.6+
 
-# 🟡 WARNING! 🟡
+## ⚠️ WARNING! ⚠️
 
 #### Accounts can not be accessed via the Web UI!
 
 #### Only use IMAP or POP3 to access you emails after the account creation!
 
-#### Before We get started
+## Before We get started
 
 You will need to have access to 5Sim and some Premium Proxies.
 
