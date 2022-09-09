@@ -31,18 +31,23 @@ Any problems with running the script and any questions please cantact me via Twi
 
 - Python 3.6+
 
+#### 🟡 WARNING! 🟡
+
+Accounts can not be accessed via the Web UI!
+Only use IMAP or POP3 to access you emails after the account creation!
+
 #### Before We get started
 
-You will need to have access to 2Captcha and some Premium Proxies.
+You will need to have access to 5Sim and some Premium Proxies.
 
-Get your 2Captcha Access here: [2Captcha](https://2captcha.com?from=11504913)
+Get your 5Sim Access here: [5Sim](https://5sim.net)
 
 Get cheap Premium proxies here: [Proxy-Cheap](https://app.proxy-cheap.com/r/4l2Djs)
 You will need Static Residential Proxies
 
-Once you are registered with both services you need to place your 2Captcha API key into the captcha_config.py file
+Once you are registered with both services you need to place your 5Sim API key into the config.py file
 
-After that place your proxies in proxy_config.py (ip:port:username:password)
+After that place your proxies in proxies.txt (ip:port)
 
 Get a copy of the Project. Open your Terminal and enter:
 
@@ -72,8 +77,8 @@ python creator.py
 
 You will find account details in list.csv in this format.
 
-| Email | Password | First Name | Last Name | Security Question | Proxy Used | App Password (imap) |
-| ----- | -------- | ---------- | --------- | ----------------- | ---------- | ------------------- |
+| Email | Password | First Name | Last Name | Security Question | Proxy Used | App Password (imap) | Phone Number Used | Phone Number ID |
+| ----- | -------- | ---------- | --------- | ----------------- | ---------- | ------------------- | ----------------- | --------------- |
 
 ## Authors
 
