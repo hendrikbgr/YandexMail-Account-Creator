@@ -145,6 +145,7 @@ if __name__ == '__main__':
         site_loaded = 'success'
 
         while(is_site_loading):
+            print(f'Loading: {url}')
             try:
                 driver.get(url)
                 driver.execute_script(
@@ -159,7 +160,7 @@ if __name__ == '__main__':
                 is_site_loading = False
 
         if site_loaded == 'success':
-
+            print(f'{url} loaded Successfully')
             try:
                 wait.until(EC.element_to_be_clickable(
                     (By.XPATH, '/html/body/div[2]/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[2]/button'))).click()
@@ -167,11 +168,13 @@ if __name__ == '__main__':
                 pass
 
             # Username pick
+            print(f'Picking Username: {rngusername}')
             user = wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '//*[@id="login"]')))
             type_me(user, rngusername)
 
             # First and Last name pick
+            print(f'Picking First & Last Name: {fakeFirstName} {fakeLastName}')
             first = wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '//*[@id="firstname"]')))
             type_me(first, fakeFirstName)
@@ -181,6 +184,7 @@ if __name__ == '__main__':
             type_me(last, fakeLastName)
 
             # Password pick
+            print(f'Picking Password: {rngpassword}')
             password = wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '//*[@id="password"]')))
             type_me(password, rngpassword)
@@ -202,8 +206,8 @@ if __name__ == '__main__':
             response = requests.get('https://5sim.net/v1/user/buy/activation/' + country + '/' + operator + '/' + product, headers=headers)
             activation_number = response.json()['phone']
             phone_id = response.json()['id']
-            print(activation_number)
-            print(phone_id)
+            print(f'Picking Phone Number: {activation_number}')
+            print(f'Phone Number ID: {phone_id}')
             
 
             phone = wait.until(EC.element_to_be_clickable(
@@ -214,6 +218,7 @@ if __name__ == '__main__':
                 (By.XPATH, '/html/body/div[1]/div/div[2]/div/main/div/div/div/form/div[3]/div/div[2]/div/div/button'))).click()
 
             try:
+                print('Waiting for Activation Code...')
                 sleep(25)
                 headers = {
                     'Authorization': 'Bearer ' + token,
@@ -222,7 +227,7 @@ if __name__ == '__main__':
 
                 response = requests.get('https://5sim.net/v1/user/check/' + str(phone_id), headers=headers)
                 activation_code = response.json()['sms'][0]['code']
-                print(activation_code)
+                print(f'Entering Activation Code: {activation_code}')
 
                 code_input = wait.until(EC.element_to_be_clickable(
                     (By.XPATH, '/html/body/div[1]/div/div[2]/div/main/div/div/div/form/div[3]/div/div[2]/div/div[2]/div[1]/span/input')))
@@ -234,18 +239,7 @@ if __name__ == '__main__':
                 wait.until(EC.element_to_be_clickable(
                     (By.XPATH, '/html/body/div[1]/div/div[2]/div/main/div/div/div/form/div[4]/div/div[2]/div/button'))).click()
 
-                print('\033[31m' + "Your New Email Adress is: ",
-                    rngusername, "@yandex.com", sep='' + '\033[0m')
-                print('\033[31m' + "Your New Email Password is: " +
-                    '\033[0m', rngpassword)
-                print('\033[31m' + "Your New First Name is: " +
-                    '\033[0m', fakeFirstName)
-                print('\033[31m' + "Your New Last Name is: " +
-                    '\033[0m', fakeLastName)
-                print('\033[31m' + "Proxy Used: " +
-                    '\033[0m', proxy)
-                print(
-                    '\033[31m' + 'Great! We added you account details to the table.' + '\033[0m')
+                
                 sleep(2)
 
             except Exception as e:
@@ -260,6 +254,7 @@ if __name__ == '__main__':
                 (By.XPATH, '/html/body/div/div/div[1]/div[2]/main/div/div/div/div[3]/span/a'))).click()
 
             # Open Passwords accordion
+            print('Adding IMAP and POP3...')
             wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '/html/body/div[1]/div/div[2]/div[3]/main/div/div/div/div/div/div/div/div[4]/div[2]'))).click()
 
@@ -278,7 +273,7 @@ if __name__ == '__main__':
                 (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[2]/ul/li[1]/span[1]/span'))).click()
 
             appName = 'App for Imap'
-
+            print(f'Picking Name for App: {appName}')
             final = wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[3]/div[1]/span/input')))
             type_me(final, appName)
@@ -292,6 +287,7 @@ if __name__ == '__main__':
             wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[2]/div[2]/button'))).click()
 
+            print('Going to Email Client Settings...')
             driver.get('https://mail.yandex.com/?dpda=yes#setup/client')
 
             wait.until(EC.element_to_be_clickable(
@@ -302,9 +298,15 @@ if __name__ == '__main__':
 
             wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '/html/body/div[3]/div[2]/div[7]/div/div[3]/div/div[2]/div/main/div[7]/div/div/div/div[2]/form/button/span/span'))).click()                   
-
-
-            csvData = [[rngusername + '@yandex.com', rngpassword, fakeFirstName, fakeLastName, recoveryname, proxy, appPassword]]
+            print('Finishing up...')
+            sleep(1)
+            print(f'Your New Email Address: {rngusername}@yandex.com')
+            print(f'Your New Password: {rngpassword}')
+            print(f'Your First & Last Name: {fakeFirstName} {fakeLastName}')
+            print(f'Your Proxy used: {proxy}')
+            print(f'Your Phone Number used: {activation_number}')
+            print(f'Your Activation Code used: {activation_code}')
+            csvData = [[rngusername + '@yandex.com', rngpassword, fakeFirstName, fakeLastName, recoveryname, proxy, appPassword, activation_number, phone_id]]
             with open('list.csv', 'a') as csvFile:
                 writer = csv.writer(csvFile)
                 writer.writerows(csvData)

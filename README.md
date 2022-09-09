@@ -4,16 +4,16 @@
 
 🏗 Manage your free Yandex Accounts. 🏗
 
-📌 Ver. 0.1 Beta 📌
+📌 Ver. 1.1 📌
 
 🤖 Full Proxy Support 🤖
 
 ## Features
 
-* Random inputs for Username & Password ✏️
-* Save Account details after Creation in .cvs file 🧾
-* Full Auto Account Creation 🤖
-* Enable IMAP & POP3
+- Random inputs for Username & Password ✏️
+- Save Account details after Creation in .cvs file 🧾
+- Full Auto Account Creation 🤖
+- Enable IMAP & POP3
 
 ## Getting Started
 
@@ -27,14 +27,13 @@ Any problems with running the script and any questions please cantact me via Twi
 
 <a href="https://www.buymeacoffee.com/hendrikbgr" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
-
 ### Prerequisites
 
-* Python 3.6+
+- Python 3.6+
 
 #### Before We get started
 
-You will need to have access to 2Captcha and some Premium Proxies. 
+You will need to have access to 2Captcha and some Premium Proxies.
 
 Get your 2Captcha Access here: [2Captcha](https://2captcha.com?from=11504913)
 
@@ -73,12 +72,12 @@ python creator.py
 
 You will find account details in list.csv in this format.
 
-Email | Password | First Name | Last Name | Security Question | Proxy Used | App Password (imap)
------ | -------- | ---------- | --------- | ----------------- | ---------- | -------------------
+| Email | Password | First Name | Last Name | Security Question | Proxy Used | App Password (imap) |
+| ----- | -------- | ---------- | --------- | ----------------- | ---------- | ------------------- |
 
 ## Authors
 
-* **Hendrik Bgr** - *Initial work* - [HendrikBgr](https://github.com/hendrikbgr)
+- **Hendrik Bgr** - _Initial work_ - [HendrikBgr](https://github.com/hendrikbgr)
 
 ## License
 
@@ -86,18 +85,16 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
+- Hat tip to anyone whose code was used
 
 ## To Do List 📝
 
-* Add random username and password. ✅
-* Print account details to in console ✅
-* Add more information to console when running ✅
-* Create requirements.txt file for easy installation ✅
-* Script Crashes when captcha is wrong ✅
+- Add random username and password. ✅
+- Print account details to in console ✅
+- Add more information to console when running ✅
+- Create requirements.txt file for easy installation ✅
+- Script Crashes when captcha is wrong ✅
 
 #### Notes
 
-This code is for educational use only. 
-
-
+This code is for educational use only.
