@@ -148,11 +148,9 @@ if __name__ == '__main__':
             print(f'Loading: {url}')
             try:
                 driver.get(url)
-                driver.execute_script(
-                    "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+                driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
                 sleep(5)
-                loading_yes = driver.find_element_by_xpath(
-                    '/html/body/div/div/div[2]/div/main/div/div/div/div/h1')
+                wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div[2]/div/main/div/div/div/form/div[4]/span/button')))
                 is_site_loading = False
 
             except (NoSuchElementException, WebDriverException, InvalidSessionIdException) as e:
@@ -261,7 +259,7 @@ if __name__ == '__main__':
             sleep(5)
 
             wait.until(EC.element_to_be_clickable(
-                (By.XPATH, '/html/body/div[1]/div/div[2]/div[3]/main/div/div/div/div/div/div/div/div[4]/div[2]/div[2]/div[3]/div/div[1]/div'))).click()
+                (By.XPATH, '/html/body/div/div/div[2]/div[3]/main/div/div/div/div/div/div/div/div[4]/div[2]/div[2]/div[3]/div/div[1]/div/span/span'))).click()
 
             wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '/html/body/div[2]/div[1]/div/div/div/div/div/div[2]/div/button'))).click()
@@ -282,8 +280,9 @@ if __name__ == '__main__':
                 (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[4]/div/div[1]/button'))).click()
             sleep(4)
 
-            appPassword = driver.find_element_by_xpath('/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[1]/div[1]/span').text
-
+            appPassword = wait.until(EC.element_to_be_clickable(
+                (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[1]/div[1]/span'))).text
+            
             wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '/html/body/div[3]/div[1]/div/div/div/div/div[2]/div[2]/div[2]/button'))).click()
 
