@@ -25,7 +25,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Support 👨‍💻
 
-Any problems with running the script and any questions please cantact me via Twitter [@hendrik_bgr](https://twitter.com/Hendrik_bgr)
+#### Please Join Our [Discord Server](https://discord.gg/HF6V6Vq2MV) for any kind of Support
+Any problems with running the script and any questions please cantact me via Discord
+
+If you have any other code requests please contact me via Twitter: [@hendrik_bgr](https://twitter.com/Hendrik_bgr)
 
 <a href="https://www.buymeacoffee.com/hendrikbgr" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
