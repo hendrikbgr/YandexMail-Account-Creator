@@ -1,13 +1,13 @@
-<h3>
-        <h3>CapSolver.com</h3>
-        <br>
-        <a href="https://dashboard.capsolver.com/passport/register?inviteCode=PIwYcBWg1MWK">
-            <img src="https://cdn.discordapp.com/attachments/1139171433436684288/1139244499311284324/20230809-142857.gif" alt="Capsolver's Banner">
-        </a>
-</h3>
-<br>
-At the lowest price on the market, you may receive a variety of solutions, including reCAPTCHA V2, reCAPTCHA V3, hCaptcha, hCaptcha Click, FunCaptcha, picture-to-text, and more. With this service, 0.1s is the slowest speed ever measured.
-<hr>
+<div align="center">
+  <h3>Proxy-Pool-API | Used by this Repo</h3>
+  <br>
+  <a href="https://proxy-pool-api.onrender.com" target="_blank">
+    <img src="proxy.gif" alt="alt text" width="2000px">
+  </a>
+  <p>Access a 100% free proxy pool API! Quickly and easily integrate proxies into your projects.</p>
+  <br>
+  <p> Visit <a href="https://proxy-pool-api.onrender.com" target="_blank">proxy-pool-api.onrender.com</a> to get started.</p>
+</div>
 
 
 # Yandex Account Creator
