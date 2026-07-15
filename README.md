@@ -1,12 +1,12 @@
 <div align="center">
-  <h3>Proxy-Pool-API | Used by this Repo</h3>
+  <h2>FakeSignup | Replaced this Repo</h2>
   <br>
-  <a href="https://proxy-pool-api.onrender.com" target="_blank">
-    <img src="proxy.gif" alt="alt text" width="2000px">
+  <a href="https://fakesignup.com" target="_blank">
+    <img src="BANNER-AD.gif" alt="alt text" width="2000px">
   </a>
-  <p>Access a 100% free proxy pool API! Quickly and easily integrate proxies into your projects.</p>
+  <p>Automate the entire registration loop with one-click dummy data, instant temp emails, and automated verification link extraction.</p>
   <br>
-  <p> Visit <a href="https://proxy-pool-api.onrender.com" target="_blank">proxy-pool-api.onrender.com</a> to get started.</p>
+  <p> Visit <a href="https://fakesignup.com" target="_blank">fakesignup.com</a> to get started.</p>
 </div>
 
 
