@@ -2,7 +2,7 @@
   <h2>FakeSignup | Replaced this Repo</h2>
   <br>
   <a href="https://fakesignup.com" target="_blank">
-    <img src="BANNER-AD.gif" alt="alt text" width="2000px">
+    <img src="fakesignup.gif" alt="alt text" width="2000px">
   </a>
   <p>Automate the entire registration loop with one-click dummy data, instant temp emails, and automated verification link extraction.</p>
   <br>
